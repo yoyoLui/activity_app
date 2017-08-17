@@ -1,0 +1,24 @@
+@import "../../common/common.wxss";
+
+page {
+  background: #f4f4f4;
+}
+
+.login-img {
+  background-color: #f4f4f4;
+}
+
+.login-img image {
+  width: 100%;
+  background-color: #f4f4f4;
+}
+
+.button image{
+  width:40rpx;
+  height: 43.2rpx;
+  margin-left: 24rpx;
+  margin-right:24rpx;
+}
+.button{
+  margin: 40rpx auto;
+}

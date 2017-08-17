@@ -1,0 +1,112 @@
+@import "../../common/common.wxss";
+
+page {
+  background: #fff;
+}
+
+.change-phone-tip {
+  width: 638rpx;
+  text-align: left;
+  font-size: 34rpx;
+  color: #646464;
+  margin-top: 64rpx;
+  margin-bottom: 48rpx;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-img {
+  background-color: #f4f4f4;
+}
+
+.login-img image {
+  width: 100%;
+  background-color: #f4f4f4;
+}
+
+.new-active-phone-view {
+  position: relative;
+  width: 638rpx;
+  height: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  text-align: left;
+  margin: 54.9rpx 68rpx;
+  vertical-align: middle;
+}
+
+.new-active-phone-show {
+  font-size: 30rpx;
+  color: rgba(12, 17, 19, 0.70);
+  line-height: 30rpx;
+  text-align: center;
+}
+
+.new-active-phone-change {
+  position: absolute;
+  right: 24rpx;
+  font-size: 30rpx;
+  color: #fb7511;
+  line-height: 32rpx;
+  text-align: center;
+}
+
+.new-active-phone-view image {
+  position: absolute;
+  right: 0;
+  text-align: right;
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.button  {
+ margin: 48rpx auto;
+}
+
+button[disabled][type="default"], wx-button[disabled]:not([type]) {
+color:#fff;
+background: #CFD4D7;
+}
+.button::after {
+  border: 0px solid white;
+}
+.login-info {
+  padding: 12px 25px 0 25px;
+}
+
+.login-phone, .login-code {
+  width: 638rpx;
+  height: 112rpx;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(12, 17, 19, 0.22);
+  font-size: 30rpx;
+}
+
+.login-phone input, .login-code input {
+  color: rgba(12,17,19,0.72);
+  flex: 1;
+  margin-top: 14.875px;
+  margin-bottom: 14.875px;
+}
+
+.login-code {
+ font-size: 30rpx;
+  color: rgba(12, 17, 19, 0.22);
+}
+.code{
+  font-size: 30rpx;
+  color: #FB7511;
+
+}
+.code.true{
+  color: rgba(12,17,19,0.22);
+}

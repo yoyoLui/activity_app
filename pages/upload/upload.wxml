@@ -1,0 +1,46 @@
+<view class="upload-panel panel-zc {{select_penal_1}}">
+    <view class="upload-panel-top">
+        <text class="upload-panel-top-text">选择一个您常接单的客户端</text>
+        <view class="upload-panel-top-navigator">
+            <text class="icon-item zhuanche {{select_zc}}" bindtap="selectZc">
+                <text class="icon"></text>
+            </text>
+            <view class="upload-panel-top-img">
+                <image bindtap="selectImage" src="{{select_zc_image}}"/>
+                <text>如图所示，请打开滴滴/优步司机端“个人资料”页面进行截图</text>
+            </view>
+
+            <text class="icon-item yidao {{select_yd}}" bindtap="selectYd">
+                <text class="icon"></text>
+            </text>
+            <view class="upload-panel-top-img">
+                <image bindtap="selectImage" src="{{select_yd_image}}"/>
+                <text>如图所示，请打开易到司机端“个人资料”页面进行截图</text>
+            </view>
+
+            <text class="icon-item shenzhou {{select_sz}}" bindtap="selectSz">
+                <text class="icon"></text>
+            </text>
+            <view class="upload-panel-top-img">
+                <image bindtap="selectImage" src="{{select_sz_image}}"/>
+                <text>如图所示，请打开神州司机端“个人资料”页面进行截图</text>
+            </view>
+        </view>
+    </view>
+
+    <view class="upload-panel-bottom">
+        <button bindtap="upload" class="button ejy-button">提交申请</button>
+    </view>
+</view>
+
+<view class="upload-panel panel-qiyouhuoche {{select_penal_2}}">
+    <view class="upload-panel-imgs">
+        <image bindtap="selectQiyouhuoche1" src="{{select_qiyouhuoche_image1}}"></image>
+        <image bindtap="selectQiyouhuoche2" src="{{select_qiyouhuoche_image2}}"></image>
+    </view>
+    <view class="upload-panel-bottom">
+        <button bindtap="merge" class="button  ejy-button">提交申请</button>
+    </view>
+</view>
+
+<canvas style="width: {{canvas_width}}px; height: {{canvas_height}}px;position:absolute;z-index:100;display:none;" canvas-id="merge-canvas"></canvas>

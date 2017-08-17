@@ -1,0 +1,61 @@
+<view class="container">
+
+    <form bindsubmit="getMoney" report-submit="true">
+      <view class="panel-top panel-radius bg">
+          <view><text class="top-money-logo">￥</text><text class="top-money">{{no_exchange_amount}}</text></view>
+          <view class="top-money-text"><text>已获得{{total_amount}}元加油，已提现{{exchange_amount}}元</text></view>
+            <view class="top-button"><button formType="submit" class="button">提取加油金</button></view>
+      </view>
+    </form>
+
+    <view class="panel-record" style="margin-top:16px;margin-bottom:72px;">
+        <view class="panel-record-content">
+            <view class="records-title"><text>邀请用户</text></view>
+
+            <view class="invites">
+
+                <view class="nothing" wx:if="{{null == receive_record || receive_record.length == 0 || receive_record.length == 'null'}}">
+                    <image src="https://img.ejiayou.com/experience_app_img/nothing@2x.png"></image>
+                </view>
+
+                
+                <view wx:for="{{receive_record}}" wx:for-item="item" wx:key="item">
+                    
+                    <view class="item" wx:if="{{item.prize_type == 0}}">
+                      <view class="dl">
+                          <view class="dt"><image class="head-img" src="{{item.avatar_url}}"></image></view>
+                          <text class="name">{{item.nick_name}}</text>
+                          <text class="time">{{item.create_time}}</text>
+                          <text class="status1">
+                              <text class="amount">{{item.amount}}</text>
+                          </text>
+                      </view>
+                    </view>
+
+                    <view class="item" wx:elif="{{item.prize_type == 1}}">
+                      <view class="dl">
+                          <view class="dt"><image class="head-img" src="{{item.avatar_url}}"></image></view>
+                          <text class="name">{{item.nick_name}}</text>
+                          <text class="time">{{item.create_time}}</text>
+                          <text class="status2">
+                              <text class="amount">{{item.amount}}</text>
+                              <text class="status">已领取</text>
+                          </text>
+                      </view>
+                    </view>
+
+                </view>
+                
+            </view>
+
+            <view class="records-title"><text>奖励规则</text></view>
+            <view class="rules">
+                <view class="p1">分享到专快车群，群好友即可直接领取礼品卡</view>
+                <view class="p2">您成功赠送一位专快车司机礼品卡，即可随机获得0.1~30元的加油金</view>
+                <view class="p3">您最多获得10份加油金，点击提取加油金，就可把当前获得的加油金赠送到您的易加油账户（以优惠券形式）</view>
+                <view class="p4">加油金查询方式：关注易加油公众号——点击菜单栏“我”——我的卡包</view>
+            </view>
+        </view>
+    </view>
+
+</view>

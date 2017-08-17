@@ -1,0 +1,144 @@
+/* received_zhuhai.wxss */@import "../../common/common.wxss";
+
+page {
+  background: #fff;
+}
+
+.login-img {
+  background-color: #f4f4f4;
+}
+
+.login-img image {
+  width: 100%;
+  background-color: #f4f4f4;
+}
+
+.new-active-phone-view {
+  position: relative;
+  width: 638rpx;
+  height: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  text-align: left;
+  margin: 54.9rpx 68rpx;
+  vertical-align: middle;
+}
+
+.new-active-phone-show {
+  font-size: 30rpx;
+  color: rgba(12, 17, 19, 0.70);
+  line-height: 30rpx;
+  text-align: center;
+}
+
+.new-active-phone-change {
+  position: absolute;
+  right: 24rpx;
+  font-size: 30rpx;
+  color: #fb7511;
+  line-height: 32rpx;
+  text-align: center;
+}
+
+.new-active-phone-view image {
+  position: absolute;
+  right: 0;
+  text-align: right;
+  width: 24rpx;
+  height: 24rpx;
+}
+.button image{
+  width:40rpx;
+  height: 43.2rpx;
+  margin-left: 24rpx;
+  margin-right:24rpx;
+}
+/*mask*/
+
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  opacity: 0.5;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.40);
+}
+
+/*content*/
+
+.drawer_box {
+  width: 606rpx;
+  height: 364rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  z-index: 1001;
+  background: #f4f4f4;
+  margin: -182rpx 72rpx;
+  border-radius: 4rpx;
+}
+
+.drawer_title {
+  padding: 15px;
+  font: 20px "microsoft yahei";
+  text-align: center;
+}
+
+.drawer_content {
+  height: 260rpx;
+  width: 100%;
+  padding-top: 24rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+}
+
+button.btn_chaiyou, button.btn_qiyou {
+  display: inline-block;
+  width: 50%;
+  height: 106rpx;
+  line-height: 2.88;
+  font-size: 36rpx;
+  text-align: center;
+  color: #fb7511;
+  box-sizing: border-box;
+  border-radius: 0rpx;
+  border-right-width: 0rpx;
+}
+
+button.btn_chaiyou {
+  border-right-width: 0rpx;
+}
+
+button.btn_chaiyou::after, button.btn_qiyou::after {
+  border-radius: 0rpx;
+  border-width: 0rpx;
+  border-color: #dcdcdc;
+  border-right-width: 0rpx;
+}
+.title {
+  height: 30px;
+  line-height: 30px;
+  width: 468rpx;
+  text-align: center;
+  display: inline-block;
+  font-size: 36rpx;
+  margin: 40rpx auto;
+}
+
+.fuel {
+  width: 92rpx;
+  height: 84rpx;
+}
+
+.button-hover {
+  background-color: #e0e0e0;
+}

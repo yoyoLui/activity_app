@@ -1,0 +1,12 @@
+<view class="container">
+
+
+  <view class="login-img" style="background-color:#fff;">
+    <image src="{{url}}" mode="widthFix"></image>
+  </view>
+    <view class="login-img" >
+    <image src="https://img.ejiayou.com/experience_app_img/experience_app_2/share_again_text.png" mode="widthFix"></image>
+  </view> 
+  <button class="button " open-type="share" > <image src="https://img.ejiayou.com/experience_app_img/experience_app_2/Shape@3x.png"></image>{{button_text}}</button>
+
+</view>

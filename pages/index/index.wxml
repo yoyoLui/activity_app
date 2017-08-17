@@ -1,0 +1,46 @@
+<view style="display:none;" class="container {{is_index}}">
+    <view class="panel-bk {{show_bk}}">
+        <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_1.png" mode="widthFix" style="width:100%;display:block;"></image>
+        <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_2.png" mode="widthFix" style="width:100%;display:block;"></image>
+        <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_3.png" mode="widthFix" style="width:100%;display:block;"></image>
+        <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_4.png" mode="widthFix" style="width:100%;display:block;"></image>
+
+        <view style="margin-top:28px;margin-bottom:82px;padding-bottom:82px;">
+          <button bindtap="toApply" class="button">立即申请</button>
+        </view>
+    </view>
+
+    <view class="panel-mycard {{show_mycard}}">
+
+        <view class="nocard {{nocard}}">您还没有申请易加油专属油卡</view>
+
+        <view class="success {{success}}" style="margin-bottom:60px;padding-bottom:60px;">
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170614222424.png" mode="widthFix" style="width:100%;display:block;"></image>
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_2.png" mode="widthFix" style="width:100%;display:block;"></image>
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_3.png" mode="widthFix" style="width:100%;display:block;"></image>
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_4.png" mode="widthFix" style="width:100%;display:block;"></image>
+        </view>
+
+        <view class="audting {{audting}}" style="margin-bottom:60px;padding-bottom:60px;">
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/new_1_checking_zkc@2x.png" mode="widthFix" style="width:100%;display:block;"></image>
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_2.png" mode="widthFix" style="width:100%;display:block;"></image>
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_3.png" mode="widthFix" style="width:100%;display:block;"></image>
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_4.png" mode="widthFix" style="width:100%;display:block;"></image>
+        </view>
+
+    </view>
+
+    <view class="panel-menu">
+        
+        <view bindtap="bk" class="item">
+          <image src="{{bk_checked_image}}"></image>
+          <view>办卡</view>
+        </view>
+
+        <view bindtap="my" class="item">
+          <image src="{{mycard_checked_image}}"></image>
+          <view>我的</view>
+        </view>
+
+    </view>
+</view>

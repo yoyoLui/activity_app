@@ -1,0 +1,56 @@
+<view class="container">
+    <form bindsubmit="toApply">
+
+          <view class="panel">
+              <view class="panel-flex">
+                <text>姓名</text>
+                <input name="name" placeholder-style="color: rgba(12,17,19,0.22);" placeholder="不少于两个汉字" maxlength="20"/>
+              </view>
+          </view>
+
+          <view class="panel">
+              <view class="panel-flex">
+                <text>姓名拼音</text>
+                <input name="pyname" placeholder-style="color: rgba(12,17,19,0.22);" placeholder="请输入姓名拼音" maxlength="20"/>
+              </view>
+          </view>
+
+          <view class="panel">
+              <view class="panel-flex">
+                <text>身份证号</text>
+                <input name="number" placeholder-style="color: rgba(12,17,19,0.22);" placeholder="请输入身份证号" maxlength="20"/>
+              </view>
+          </view>
+
+          <view class="panel">
+              <view class="panel-flex">
+                <text>发证机关</text>
+                <input name="numberarea" placeholder-style="color: rgba(12,17,19,0.22);" placeholder="发证机关位于身份证背面" maxlength="50"/>
+              </view>
+          </view>
+
+          <view class="panel">
+              <view class="panel-flex">
+                <text>邮箱</text>
+                <input name="email" placeholder-style="color: rgba(12,17,19,0.22);" maxlength="20"/>
+              </view>
+          </view>
+
+          <view class="panel">
+              <view class="panel-flex">
+                <text>手机号</text>
+                <input name="mobile" bindinput="bindPhoneInput" type="number" maxlength="11" placeholder-style="color: rgba(12,17,19,0.22);" placeholder="11位手机号"/>
+              </view>
+          </view>
+
+          <view class="panel">
+              <view class="panel-flex">
+                <text>短信验证码</text>
+                <input bindinput="bindCodeInput" name="smscode" type="number" maxlength="6" placeholder-style="color: rgba(12,17,19,0.22);"/>
+                <text bindtap="sendCode" class="code able">{{login_code}}</text>
+              </view>
+          </view>
+
+          <button formType="submit" class="button" style="margin-top:20px">下一步</button>
+    </form>
+</view>

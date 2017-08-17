@@ -1,0 +1,204 @@
+/* pages/new_index/new_index.wxss */
+@import "../../common/common.wxss";
+page{
+background: #F4F4F4;
+}
+.bg{
+background-image: url(https://img.ejiayou.com/wxmp/imgs/1_bg.png);
+background-size: 100% 100%;
+}
+.panel-radius{
+margin-left:8px;
+margin-right:8px;
+border-radius:5px;
+}
+.panel-top{
+padding:44px 28px;
+text-align:center;
+}
+.top-money-logo{
+font-size:28px;
+color:rgba(12,17,19,0.86);
+display:inline-block;
+line-height:40px;
+}
+.top-money{
+font-size:48px;
+color:rgba(12,17,19,0.86);
+letter-spacing:0;
+display:inline-block;
+line-height:40px;
+}
+.top-money-text{
+margin-top:10px;
+}
+.top-money-text text{
+font-size:14px;
+color:rgba(12,17,19,0.45);
+letter-spacing:0;
+line-height:16px;
+}
+.panel-bottom{
+background: #F4F4F4;
+margin-top: 44px;
+}
+.top-button{
+margin-top:24px;
+}
+.button{
+font-size: 18px;
+color: #FFFFFF;
+line-height: 24px;
+background: #FB7511;
+border-radius: 40px;
+padding: 12px 0;
+display: flex;
+display: -moz-box;
+display: -ms-flexbox;
+display: -webkit-flex;
+-webkit-box-align: center;
+-moz-box-align: center;
+-ms-flex-align: center;
+-webkit-align-items: center;
+align-items: center;
+justify-content: center;
+}
+.button-logo{
+width:24px !important;
+height: 24px;
+margin-right: 3px;
+}
+.panel-image{
+background: #fff;
+}
+.panel-image image{
+width:100%;
+}
+.head-img{
+width:40px;
+height:40px;
+border-radius:50%;
+}
+.panel-record{
+background:#fff;
+}
+.panel-record-content{
+margin: 0 32px;
+overflow: hidden;
+}
+.records-title{
+font-weight: normal;
+margin: 24px auto 11.52px;
+font-size: 14.08px;
+color: #ababab;
+width: 100%;
+text-align: center;
+}
+.records-title text{
+position: relative;
+font-size: 15px;
+}
+.records-title text::after,.records-title text::before{
+content: '';
+position: absolute;
+display: block;
+width: 320px;
+height: 1px;
+background-color: #E1E2E2; 
+}
+.records-title text:before {
+left: -339.2px;
+top: 50%;
+}
+.records-title text:after {
+right: -339.2px;
+top: 50%;
+}
+
+.invites .item{
+height: 72px;
+}
+.item .dl{
+position: relative;
+height: 100%;
+}
+.item .dl .dt{
+position: absolute;
+width: 40px;
+height: 40px;
+left: 0;
+top: 50%;
+margin-top: -20px;
+background: #CCC;
+border-radius: 40px;
+}
+.item .name{
+position: absolute;
+left: 56px;
+top: 16px;
+font-size: 18px;
+color: #565A5B;
+}
+.item .time{
+position: absolute;
+left: 56px;
+bottom: 10px;
+font-size: 14px;
+color: #A1A4A5;
+}
+.item .dl .amount:before{
+content: "￥";
+position: absolute;
+left: -14.4px;
+bottom: 4px;
+font-size: 14px;
+}
+.item .dl .status1{
+color: #565A5B;
+}
+.item .dl .status1 .amount{
+position: absolute;
+right: 0;
+top: 16px;
+font-size: 28px;
+}
+.item .dl .status2{
+color: #A1A4A5;
+}
+.item .dl .status2 .amount{
+position: absolute;
+right: 0;
+top: 10px;
+font-size: 28px;
+}
+.item .dl .status2 .status{
+position: absolute;
+right: 0;
+bottom: 10px;
+font-size: 14px;
+}
+.rules {
+color:#8B8E8F;
+font-size:14px;
+position:relative;
+text-align:left;
+line-height:20px;
+margin-bottom: 32px;
+}
+.rules view{
+margin-top:8px;
+position:relative;
+padding-left: 15px;
+}
+.p1:before{ content: "1.";position: absolute;top: 0; left: 0; }
+.p2:before{ content: "2.";position: absolute;top: 0; left: 0; }
+.p3:before{ content: "3.";position: absolute;top: 0; left: 0; }
+.p4:before{ content: "4.";position: absolute;top: 0; left: 0; }
+.invites .nothing{
+text-align: center;
+margin-top:24px;
+}
+.nothing image{
+width:96px;
+height:96px;
+}

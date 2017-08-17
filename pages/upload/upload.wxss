@@ -1,0 +1,167 @@
+/**index.wxss**/
+@import "../../common/common.wxss";
+page{
+	height: 100%;
+}
+.upload-panel{
+display: none;
+}
+.upload-panel.select{
+display: block;
+}
+.upload-panel-bottom{
+position: absolute;
+bottom:0;
+height:65px;
+background: #fff;
+width:100%;
+}
+.upload-panel .ejy-button{
+position:absolute;
+left:0;
+right:0;
+top:0;
+bottom:0;
+margin:auto;
+height:46px;
+line-height: 46px;
+}
+
+/**专车上传样式**/
+.panel-zc .upload-panel-top{
+position: absolute;
+top:0;
+bottom:65px;
+width: 100%;
+background: #fff;
+}
+.panel-zc .upload-panel-top-navigator{
+display: flex;
+display: -moz-box;
+display: -ms-flexbox;
+display: -webkit-flex;
+height: 70px;
+}
+.panel-zc .icon-item{
+display: flex;
+display: -moz-box;
+display: -ms-flexbox;
+display: -webkit-flex;
+-webkit-box-align: center;
+-moz-box-align: center;
+-ms-flex-align: center;
+-webkit-align-items: center;
+align-items: center;
+justify-content: center;
+flex: 1;
+position: relative;
+}
+.panel-zc .icon-item:active{
+background-color: rgba(210, 212, 214, 0.42);
+}
+.panel-zc .icon-item.checked .icon::after{
+content: "";
+background:url(https://img.ejiayou.com/wxmp/imgs/Erefuel_uploadinfo_regsite_arrow.png) no-repeat;
+background-size: 100% 100%;
+height:8px;
+width:15px;
+display:block;
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+margin:auto;
+}
+
+.panel-zc .zhuanche .icon{
+background:url(https://img.ejiayou.com/wxmp/imgs/Erefuel_uploadinfo_regsite_didi20161219.png) no-repeat;
+background-size: 100% 100%;
+height: 60px;
+width: 92px;
+display: block;
+}
+.panel-zc .zhuanche.checked .icon{
+background:url(https://img.ejiayou.com/wxmp/imgs/Erefuel_uploadinfo_regsite_didi_selected20161219.png) no-repeat;
+background-size: 100% 100%;
+height: 60px;
+width: 92px;
+display: block;
+}
+
+.panel-zc .yidao .icon{
+background:url(https://img.ejiayou.com/wxmp/imgs/Erefuel_uploadinfo_regsite_yidao20161219.png) no-repeat;
+background-size: 100% 100%;
+height: 60px;
+width: 92px;
+display: block;
+}
+.panel-zc .yidao.checked .icon{
+background:url(https://img.ejiayou.com/wxmp/imgs/Erefuel_uploadinfo_regsite_yidao_selected20161219.png) no-repeat;
+background-size: 100% 100%;
+height: 60px;
+width: 92px;
+display: block;
+}
+
+.panel-zc .shenzhou .icon{
+background:url(https://img.ejiayou.com/wxmp/imgs/Erefuel_uploadinfo_regsite_shenzhou20161219.png) no-repeat;
+background-size: 100% 100%;
+height: 60px;
+width: 92px;
+display: block;
+}
+.panel-zc .shenzhou.checked .icon{
+background:url(https://img.ejiayou.com/wxmp/imgs/Erefuel_uploadinfo_regsite_shenzhou_selected20161219.png) no-repeat;
+background-size: 100% 100%;
+height: 60px;
+width: 92px;
+display: block;
+}
+
+.panel-zc .upload-panel-top-img{
+display: none;
+}
+.panel-zc .checked + .upload-panel-top-img{
+display: block;
+position:absolute;
+top:100px;
+left:0;
+right:0;
+bottom:0;
+background:#D2D4D6;
+text-align: center;
+}
+.panel-zc .upload-panel-top-img text{
+font-size: 12px;
+color: rgb(50, 50, 50);
+display: block;
+text-align:center;
+margin-top:15px;
+}
+.panel-zc .upload-panel-top-img image{
+height: 75%;
+width: 60%;
+margin-top: 15px;
+}
+
+.panel-zc .upload-panel-top-text{
+display:block;
+text-align:center;
+height:30px;
+font-size:12px;
+line-height:30px;
+
+}
+
+/**汽油货车上传样式**/
+.upload-panel-imgs{
+position: absolute;
+top:0;
+bottom:65px;
+background: #fff;
+text-align: center;
+}
+.upload-panel-imgs image{
+width: 85%;
+margin-top:20px;
+}

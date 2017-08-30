@@ -6,6 +6,17 @@ Page({
     url: '',
     button_text: ''
   },
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    //模拟加载
+    setTimeout(function () {
+      // complete
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 1500);
+    this.onLoad();
+
+  },
   onLoad: function (options) {
     var that = this; 
     if (app.user_info_data.from_type == 1) {
@@ -16,13 +27,11 @@ Page({
       that.data.url = "https://img.ejiayou.com/experience_app_img/experience_app_2/truck_car_head.jpg";
       that.data.button_text = '分享给货车好友';
     }
-    that.setData(that.data);
-
     wx.showShareMenu({
       withShareTicket: true
     })
-    that.data.title = app.share_data.title;;
-
+    that.data.title = app.share_data.title;
+    that.setData(that.data);
   },
   onShareAppMessage: function (res) {//拉起分享页面
     var that = this;
@@ -67,7 +76,9 @@ Page({
       }
     }
   },
+  onReachBottom: function () {
 
+  },
 
   onReady: function () {
     // 页面渲染完成

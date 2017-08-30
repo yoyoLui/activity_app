@@ -13,7 +13,7 @@ button, view, text, input, toast {
 }
 
 .button {
-  font-size: 18px;
+  font-size: 36rpx;
   color: #fff;
   background-color: #fb7511;
   line-height: 24px;

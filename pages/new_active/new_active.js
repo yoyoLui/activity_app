@@ -10,6 +10,20 @@ Page({
     showUpdatePhone: true,
     url: 'https://img.ejiayou.com/experience_app_img/experience_app_2/fast_car_head.jpg'
   },
+  onReachBottom: function () {
+
+  },
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    //模拟加载
+    setTimeout(function () {
+      // complete
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 1500);
+    this.onLoad();
+
+  },
   onLoad: function (opt) {
    
     wx.showNavigationBarLoading();

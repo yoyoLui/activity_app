@@ -1,3 +1,4 @@
+<import src="/utils/templete/stationList.wxml" />
 <view class="container">
   <!--wxapp-toast start-->
   <view class="wxapp-toast-content-box" wx:if="{{isShowToast}}">
@@ -21,34 +22,7 @@
     <image src="https://img.ejiayou.com/experience_app_img/experience_app_2/old_active_bg.png" mode="scaleToFill"></image>
   </view>
 
-  <!--油站列表-->
-  <view class="stationList">
-    <view class="gas-station-list" style="width: 100%;background-color: #fff;">
-      <view wx:for="{{station_list}}" wx:for-item="item" wx:key="item" style="width: 100%;height: 265rpx;position: relative;">
-        <image class="f-left" src="{{item.pic_url}}" style="width: 156rpx;height: 144rpx;margin: 30rpx 20rpx 0 20rpx;border-radius: 8rpx;"></image>
-        <view class="f-left" style="width: 554rpx;">
-          <view class="f-clear" style="height: 40rpx;margin-top: 30rpx;">
-            <text class="f-left" style="color:#323232;font-size: 35rpx;line-height: 40rpx;width: 450rpx;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{item.filling_station_name}}</text>
-            <text wx:if="{{item.station_star!=0}}" class="f-right" style="color: #efc241;font-size: 25rpx;margin:4rpx 20rpx 0 0;line-height: 32rpx;">{{item.station_star}}分</text>
-          </view>
-
-          <view class="f-clear" style="width: 554rpx;height: 32rpx;margin-top: 8rpx;font-size: 25rpx;line-height: 32rpx;color:#969696;">
-            <text class="f-left">{{item.filling_station_address}}</text>
-            <text class="f-right" style="margin-right: 20rpx" wx:if="{{item.distance<=50}}">{{item.distance}}km</text>
-          </view>
-
-          <view class="f-clear" style="width: 554rpx;height: 36rpx;;margin-top: 28rpx;">
-            <text class="f-left" style="font-size: 25rpx;color:#FFA032;line-height: 36rpx;">{{item.reduce_msg}}<text style="font-size: 35rpx;">{{item.reduce_price}}</text>元</text>
-            <image class="f-left" src="https://img.ejiayou.com/experience_app_img/yh.png" style="width: 12rpx;height: 18rpx;margin:14rpx 0 0 10rpx;"></image>
-          </view>
-
-          <view class="f-clear" style="width: 554rpx;height: 32rpx;margin-top: 8rpx;font-size: 25rpx;line-height: 32rpx;color:#969696;">
-            <text wx:for="{{item.oils}}" wx:for-item="oil" wx:key="oil" style="margin-right:10rpx">{{oil.oil_code}}{{oil.price}}元/L</text>
-          </view>
-
-        </view>
-        <view style="position: absolute;height: 1px;background: #eee;width: 95%;left: 2.5%;bottom: 0;"></view>
-      </view>
-    </view>
-  </view>
+  <!-- 油站列表 -->
+  <template is="stationListTemp" data="{{station_list: station_list}}"></template>
+  
 </view>

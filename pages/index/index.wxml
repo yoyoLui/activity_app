@@ -1,5 +1,5 @@
 <view style="display:none;" class="container {{is_index}}">
-    <view class="panel-bk {{show_bk}}">
+    <view  class="panel-bk {{show_bk}}">
         <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_1.png" mode="widthFix" style="width:100%;display:block;"></image>
         <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_2.png" mode="widthFix" style="width:100%;display:block;"></image>
         <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_3.png" mode="widthFix" style="width:100%;display:block;"></image>

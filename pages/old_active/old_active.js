@@ -5,11 +5,19 @@ Page({
     station_list: '',
     ticketGroup: '',
   },
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    //模拟加载
+    setTimeout(function () {
+      // complete
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 1500);
+    this.onLoad();
+
+  },
   onLoad: function (options) {
     var that = this;
-    wx.showLoading({
-      title: '加载中',
-    })
     app.getTicket(app.user_info_data._k, function () {
       wx.hideLoading();
       that.data.ticketGroup = app.old_active_data.ticketGroup;
@@ -35,6 +43,9 @@ Page({
   },
   onHide: function () {
     // 页面隐藏
+  },
+  onReachBottom: function () {
+
   },
   onUnload: function () {
     // 页面关闭

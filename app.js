@@ -1,5 +1,5 @@
-//var server = 'https://yifenshe.top';
-var server = 'https://dev.ejiayou.com';
+var server = 'https://yifenshe.top';
+//var server = 'https://dev.ejiayou.com';
 App({
 
   login_data: null,
@@ -46,6 +46,7 @@ App({
     is_show: false,
     toast: '',
     stationData: '',
+    isGetCity_id: false,
   },
   onLaunch: function (option) {
     var that = this;
@@ -63,7 +64,9 @@ App({
   },
   onShow: function () { },
   onHide: function () { },
-
+  onError: function (res) {
+    console.log('app报错' + JSON.stringify(res));
+  },
   //接口api
   server_api: (function (protocol) {
     return {
@@ -98,7 +101,7 @@ App({
       receive: protocol + "/activity/experience_2/service/mini_apps/user/receive",//用户点击"分享领券"
       activat: protocol + "/activity/experience_2/service/mini_apps/experience/activat",//用户获得优惠券（新用户获得专快车，老用户无）
       updateMobile: protocol + "/activity/experience_2/service/mini_apps/mobile/update",//修改手机号
-      defaultActivity: 'https://yifenshe.top/activity/default',
+      defaultActivity: protocol + '/activity/experience_2/service/mini_apps/access_log/add',
       getCity_id: protocol + "/activity/experience_2/service/mini_apps/city_id/get",//获取city_id
 
     }
@@ -626,21 +629,22 @@ App({
   //埋点
   defaultShareClick: function (channel_no) {
     var that = this;
-    console.log('掉起埋点 channel_no is ' + channel_no + "," + that.server_api.defaultActivity);
+    console.log('掉起埋点 channel_no is ' + channel_no + "," + that.server_api_zhuhai.defaultActivity);
     wx.request({
-      method: "POST",
-      url: that.server_api.defaultActivity,
+      method: "GET",
+      url: that.server_api_zhuhai.defaultActivity,
       data: {
         channel_no: channel_no,
         user_id: that.user_info_data.city_id,
         openid: that.user_info_data.union_id,
       },
       success: function (res) {
-        console.log('埋点成功 channel_no is ' + channel_no);
+        console.log('埋点成功 ');
       }
     })
 
   },
+
   //获取city_id
   getCity_id: function (fun) {
     var that = this;
@@ -662,6 +666,9 @@ App({
       fail: function (res) {
         console.log('获取城市id失败');
         console.log(res);
+        if (fun) {
+          fun();
+        }
       }
     })
   },
@@ -669,15 +676,19 @@ App({
   //获取city_id
   getCity_id_zhuhai: function (fun) {
     var that = this;
+    var options = {
+      longitude: that.position_data.longitude,
+      latitude: that.position_data.latitude,
+    };
+    console.log('getCity_id options=' + JSON.stringify(options));
     wx.request({
       method: "POST",
       url: that.server_api_zhuhai.getCity_id,
-      data: {
-        longitude: that.position_data.longitude,
-        latitude: that.position_data.latitude,
-      },
+      data: options,
       success: function (res) {
+        // console.log('getCity_id 返回res=' + JSON.stringify(res));
         if (res.data.ret == 0) {
+          that.zhuhai_data.isGetCity_id = true;
           that.user_info_data.city_id = res.data.data.city_id;
           if (fun) {
             fun();
@@ -685,6 +696,7 @@ App({
         }
       },
       fail: function (res) {
+        that.zhuhai_data.isGetCity_id = true;
         console.log('获取城市id失败');
         console.log(res);
       }
@@ -695,19 +707,21 @@ App({
     var that = this;
     that.getShareEncryptedData_zhuhai(that.group_data.share_ticket, function () {
       that.checkSession_zhuhai(function () {
+        var options = {
+          encrypt_data: that.user_info_data.encryptedData,
+          code: that.login_data.code,
+          iv: that.user_info_data.iv,
+          encrypt_data1: that.group_data.encrypted_data,
+          iv1: that.group_data.iv
+        };
+        // console.log('get_user_info OPTIONS=' + JSON.stringify(options));
         wx.request({
           method: "POST",
           url: that.server_api_zhuhai.get_user_info,
-          data: {
-            encrypt_data: that.user_info_data.encryptedData,
-            code: that.login_data.code,
-            iv: that.user_info_data.iv,
-            encrypt_data1: that.group_data.encrypted_data,
-            iv1: that.group_data.iv
-          },
+          data: options,
           success: function (res) {
             res = res.data;
-            console.log('getUserInfo返回 res=' + JSON.stringify(res));
+            // console.log('getUserInfo返回 res=' + JSON.stringify(res));
             //正常
             if (res.ret == 0) {
               that.user_info_data.user_id = res.data.user_id;
@@ -725,7 +739,7 @@ App({
             wx.hideLoading();
           },
           fail: function (res) {
-            console.log('获取用户信息错误');
+            console.log('get_user_info失败');
             console.log(res);
           }
         });
@@ -735,7 +749,7 @@ App({
 
   //获取分享加密数据与iv
   getShareEncryptedData_zhuhai: function (shareTicket, fn) {
-    console.log('获取分享加密数据getShareEncryptedData 参数shareTicket is' + shareTicket);
+    // console.log('获取分享加密数据getShareEncryptedData 参数shareTicket is' + shareTicket);
     var that = this;
     wx.getShareInfo({
       shareTicket: shareTicket,
@@ -743,7 +757,7 @@ App({
         that.group_data.encrypted_data = res.encryptedData;
         that.group_data.iv = res.iv;
         console.log("decryptedData获取分享信息成功");
-        console.log(res);
+        // console.log(res);
         if (fn) {
           fn();
         }
@@ -782,7 +796,7 @@ App({
     })
   },
 
-  //判断进入哪个页面
+  //判断进入哪个页面  
   initView_zhuhai: function (fn) {
     var that = this;
     var options;
@@ -794,7 +808,7 @@ App({
       open_gid: that.group_data.open_gid,
       from_type: that.from_data.from_type,
     };
-    console.log('initView_zhuhai 接口 options=' + JSON.stringify(options));
+    // console.log('initView_zhuhai 接口 options=' + JSON.stringify(options));
     wx.request({
       method: "POST",
       url: that.server_api_zhuhai.init_view,
@@ -828,7 +842,7 @@ App({
       open_gid: that.group_data.open_gid,
       from_type: that.user_info_data.from_type,
     };
-    console.log('received接口options=' + JSON.stringify(options));
+    // console.log('received接口options=' + JSON.stringify(options));
     wx.request({
       method: "GET",
       url: that.server_api_zhuhai.receive,
@@ -873,7 +887,7 @@ App({
       success: function (res) {
         wx.hideLoading();
         console.log("uploadGroupInfo成功");
-        console.log(res);
+        // console.log(res);
         if (res.data.ret == 0) {
           res = res.data;
           if (fn) {
@@ -899,27 +913,30 @@ App({
 
   //（新用户获得专快车身份，老用户则无）
   activat_zhuhai: function (fun) {
+
     var that = this;
     var options;
-    options={
+    options = {
       _k: that.user_info_data._k,
       union_id: that.user_info_data.union_id,
-      city_id: that.user_info_data.city_id,
+
       form_id: that.user_info_data.form_id,
-      is_white:that.user_info_data.is_white
+      is_white: that.user_info_data.is_white,
+      city_id: that.user_info_data.city_id,
     };
     console.log('进入activat_zhuhai方法');
-    console.log('activat_zhuhai 请求参数' + JSON.stringify(options));
+    // console.log('AND user_info_data.city_id=' + that.user_info_data.city_id + 'and isGetCity_id=' + that.zhuhai_data.isGetCity_id);
     var _timer = setInterval(function () {
-      console.log(that.user_info_data.city_id);
-      if (that.user_info_data._k && that.user_info_data.union_id && String(that.user_info_data.city_id).length > 5) {
+      if (that.zhuhai_data.isGetCity_id && that.user_info_data.city_id) {
+        // console.log('activat_zhuhai 请求参数' + JSON.stringify(options) + 'AND user_info_data.city_id=' + that.user_info_data.city_id + 'and isGetCity_id=' + that.zhuhai_data.isGetCity_id);
         clearInterval(_timer);
         wx.request({
           method: "POST",
           url: that.server_api_zhuhai.activat,
           data: options,
           success: function (res) {
-            console.log('activat_zhuhai 返回'+JSON.stringify(res));
+            wx.hideLoading();
+            // console.log('activat_zhuhai 返回' + JSON.stringify(res));
             that.zhuhai_data.toast = res.data.msg;//toast条显示
             if (res.data.ret == 0) {
               that.zhuhai_data.is_show = res.data.data.is_show;
@@ -935,7 +952,7 @@ App({
           }
         });
       }
-    }, 10);
+    }, 100);
   },
 
   //获取油站
@@ -943,26 +960,20 @@ App({
     var that = this;
     var options;
     options = {
-      car_type: that.user_info_data.car_type,
       longitude: that.position_data.longitude,
       latitude: that.position_data.latitude,
     };
     console.log('进入获取油站方法');
-    console.log('getStation_zhuhai 请求参数' + JSON.stringify(options));
-
     var _timer = setInterval(function () {
-      console.log(that.user_info_data.city_id);
-      if (String(that.user_info_data.city_id).length > 5) {
+      if (that.zhuhai_data.isGetCity_id) {
         clearInterval(_timer);
+        // console.log('getStation_zhuhai 请求参数' + JSON.stringify(options));
         wx.request({
           method: "POST",
           url: that.server_api_zhuhai.get_station,
-          data: {
-            longitude: that.position_data.longitude,
-            latitude: that.position_data.latitude,
-          },
+          data: options,
           success: function (res) {
-            console.log('获取油站方法成功' + JSON.stringify(res));
+            console.log('获取油站方法成功');
             res = res.data;
             if (res.ret == 0) {
               that.zhuhai_data.stationData = res.data;
@@ -984,7 +995,7 @@ App({
           }
         })
       }
-    }, 10);
+    }, 100);
   },
   //获取验证码
   getSmsCode_zhuhai: function (mobile, fn) {
@@ -1040,7 +1051,6 @@ App({
       },
       success: function (res) {
         console.log('校验验证码成功返回:');
-        console.log(res);
         res = res.data;
         wx.hideLoading();
         if (fn) {
@@ -1079,7 +1089,6 @@ App({
           fun(res.data);
         } else {//修改手机号失败
           console.log('修改手机号失败');
-          console.log(res);
           wx.showToast({
             title: res.data.msg,
           })

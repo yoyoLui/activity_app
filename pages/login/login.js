@@ -15,13 +15,27 @@ Page({
     button_down_text: '分享到专快车群即可领取',
     color: 'rgba(12, 17, 19, 0.72)!important'
   },
+  onReachBottom: function () {
 
+  },
   onShow: function () {
     wx.hideLoading();
     wx.hideNavigationBarLoading();
   },
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    //模拟加载
+    setTimeout(function () {
+      // complete
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 1500);
+    this.onLoad();
+
+  },
   //页面加载
   onLoad: function (option) {
+    console.log("login page");
     var that = this;
     if (app.user_info_data.from_type == 1) {
       that.data.head_url = 'https://img.ejiayou.com/experience_app_img/experience_app_2/fast_car_head.jpg';
@@ -30,11 +44,12 @@ Page({
       that.data.head_url = "https://img.ejiayou.com/experience_app_img/experience_app_2/truck_car_head.jpg";
       that.data.button_down_text = '分享到货车群即可领取';
     }
-    that.setData(that.data);
-    wx.showNavigationBarLoading();
-
+    //获取分享标题
+    that.data.title = app.share_data.title;
+    console.log('标题' + that.data.title);
     that.data.has_click = false;
     that.data.mobile = app.user_info_data.mobile;
+    that.setData(that.data);
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -51,17 +66,9 @@ Page({
       })
     }
 
-    console.log("login page");
-    //获取分享标题
-    that.data.title = app.share_data.title;
-    console.log('标题' + that.data.title);
-    that.setData(that.data);
-
   },
   formSubmit: function (e) {//获取formId
-
     app.user_info_data.form_id = e.detail.formId;
-
   },
   //输入手机
   bindPhoneInput: function (e) {

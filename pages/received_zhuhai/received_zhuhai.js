@@ -2,6 +2,7 @@
 var app = getApp();
 Page({
   data: {
+
     has_click: false,
     from_type: 1,
     mobile: '',
@@ -10,7 +11,18 @@ Page({
     showUpdatePhone: false,
     url: 'https://img.ejiayou.com/experience_app_img/experience_app_2/headImg_zhuhai.jpg'
   },
-  onLoad: function (opt) {
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    //模拟加载
+    setTimeout(function () {
+      // complete
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 1500);
+    this.onLoad();
+     
+  },
+  onLoad: function () {
     wx.showNavigationBarLoading();
     var that = this;
     if (app.user_info_data.mobile) {
@@ -20,6 +32,7 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
+
     //1、获取身份
     app.activat_zhuhai(function (res) {
       //1.1展现修改手机按钮
@@ -35,20 +48,23 @@ Page({
           });
         }
       }
+
       //1.2恭喜成功领卡toast
       app.showToast(app.zhuhai_data.toast, that, 2500);
       //1.3获取分享信息
       that.data.title = app.share_data.title;
       that.setData(that.data);
+
     });
 
     //2、获取油站列表    
     app.getStation_zhuhai(function (res) {
       that.data.station_list = res.data;
       that.setData(that.data);
+
     });
- 
   },
+
   formSubmit: function (e) {//获取formId
     app.user_info_data.form_id = e.detail.formId;
     console.log('formId is ' + app.user_info_data.form_id);
@@ -73,19 +89,18 @@ Page({
     }
     return {
       title: that.data.title,
-      path: '/pages/index/index?&&from_source=1&&from_type=' + app.user_info_data.from_type ,
+      path: '/pages/index/index?&&from_source=1&&from_type=' + app.user_info_data.from_type,
       success: function (res) {
         console.log("转发成功");
         console.log('打印');
         console.log(res);
         app.showToast('您已成功分享，活动现场可再领取礼品', that, 2500);
         //埋点
-        if(app.user_info_data.is_white==1){
+        if (app.user_info_data.is_white == 1) {
           app.defaultShareClick('WeFiCx');
         }
-        if (app.user_info_data.is_white==0){
+        if (app.user_info_data.is_white == 0) {
           app.defaultShareClick('pcBNuZ');
-
         }
         if (res.shareTickets && res.shareTickets.length > 0) {
           var shareTickets = res.shareTickets[0];
@@ -100,9 +115,9 @@ Page({
                   var code = login_data.code;
                   var encypt_data = res.encryptedData;
                   app.uploadGroupInfo_zhuhai(union_id, iv, code, encypt_data, function (res) {
-                   
+
                   });
-                 
+
                 }
               })
             },
@@ -125,9 +140,12 @@ Page({
     }
   },
   onReady: function () {
+    wx.hideLoading();
     // 页面渲染完成
+  
   },
   onShow: function () {
+    wx.hideLoading();
     // 页面显示
   },
   onHide: function () {
@@ -138,6 +156,6 @@ Page({
   },
 
   onReachBottom: function () {
-
+  
   },
 })

@@ -21,7 +21,7 @@ Page({
     //开关
     //app.from_data.channel_no = 1;
     //options.from_source = 0;//活动
-   // options.from_source = 1;//珠海红包
+    //options.from_source = 1;//珠海红包
     var that = this;
     //有from_source进入活动，没有from_source进入首页
     if (undefined != options && undefined != options.from_source) {
@@ -52,6 +52,7 @@ Page({
         if (undefined != options && undefined != options.from_source) {
           app.from_data.from_source = options.from_source;
         }
+        that.toActivity();
       } else if (options.from_source == 1) {//珠海红包
         that.data.is_activity_zhuhai = true;
         if (undefined != options && undefined != options.from_type) {
@@ -64,6 +65,9 @@ Page({
         if (undefined != options && undefined != options.from_source) {
           app.from_data.from_source = options.from_source;
         }
+        that.toActivity_zhuhai();
+
+
       }
     }
 
@@ -87,16 +91,10 @@ Page({
   },
   onShow: function () {
     var that = this;
-    //首页
     if (that.data.is_index) {
       that.toIndex();
     }
-    if (that.data.is_activity) {
-      that.toActivity();
-    }
-    if (that.data.is_activity_zhuhai) {
-      that.toActivity_zhuhai();
-    }
+
   },
   onHide: function () {
     // 页面隐藏
@@ -278,81 +276,92 @@ Page({
     var that = this;
     app.decryptedData(function () {
       console.log('进入decryptedData回调');
-      
-        app.initView(function (res) {
-          app.user_info_data.from_type = res.data.from_type;
-          app.user_info_data._k = res.data._k;
-          app.user_info_data.mobile = res.data.mobile;
-          app.share_data.title = res.data.title;
-          //埋点-channel_no
-          // app.defaultShareClick(app.from_data.channel_no);
-          //输入手机号页面
-          if (res.type == 1) {
-            wx.redirectTo({
-              url: "../login/login"
-            })
-          }
-          //进入老用户成功领取组合券页面
-          if (res.type == 2) {
-            wx.redirectTo({
-              url: "../old_active/old_active"
-            })
-          }
-          //进入分享页
-          if (res.type == 3) {
-            wx.redirectTo({
-              url: "../old_active_success/old_active_success"
-            })
-          }
-          //进入新用户页面
-          if (res.type == 4) {
-            wx.redirectTo({
-              url: "../new_active/new_active"
-            })
-          }
-        });
+
+      app.initView(function (res) {
+        app.user_info_data.from_type = res.data.from_type;
+        app.user_info_data._k = res.data._k;
+        app.user_info_data.mobile = res.data.mobile;
+        app.share_data.title = res.data.title;
+        //埋点-channel_no
+        // app.defaultShareClick(app.from_data.channel_no);
+        //输入手机号页面
+        if (res.type == 1) {
+          wx.redirectTo({
+            url: "../login/login"
+          })
+        }
+        //进入老用户成功领取组合券页面
+        if (res.type == 2) {
+          wx.redirectTo({
+            url: "../old_active/old_active"
+          })
+        }
+        //进入分享页
+        if (res.type == 3) {
+          wx.redirectTo({
+            url: "../old_active_success/old_active_success"
+          })
+        }
+        //进入新用户页面
+        if (res.type == 4) {
+          wx.redirectTo({
+            url: "../new_active/new_active"
+          })
+        }
+      });
 
     });
   },
 
   //进入活动_珠海
   toActivity_zhuhai: function () {
+    app.check_login.hasGetUserInfo = false;
+    app.check_login.hasLogin = false;
+
     console.log('有进入活动事件toActivity_zhuhai');
     var that = this;
+    app.user_info_data.city_id = 440400;
+    //获取经纬度（定时器是为了防止user_info_data被覆盖掉，就没有了city_id）
+    wx.getLocation({
+      success: function (res) {
+        var _timer = setInterval(function () {
+          if (app.check_login.hasGetUserInfo) {
+            clearInterval(_timer);
+            console.log('getLocation is' + JSON.stringify(res));
+            app.position_data = res;
+            console.log('经纬度 position_data=' + JSON.stringify(app.position_data));
+            app.getCity_id_zhuhai();
+          }
+        }, 100);
+      },
+      fail: function (res) {
+        app.zhuhai_data.isGetCity_id = true;
+      }
+    })
     //获取登录信息
     wx.login({
       success: function (login_data) {
-        console.log('login is' + JSON.stringify(login_data));
         app.login_data = login_data;
         app.check_login.hasLogin = true;
       }
     });
 
     //获取用户信息
-    wx.getUserInfo({//首先跟微信拿user_info_data,然后decryptedData跟后端获取用户完整信息
+    wx.getUserInfo({
+      //首先跟微信拿user_info_data,然后decryptedData跟后端获取用户完整信息
       success: function (user_info_data) {
+        // console.log('调用微信接口 user_info_data=' + JSON.stringify(user_info_data));
         app.user_info_data = user_info_data;
-        app.user_info_data.city_id = 1;
         app.check_login.hasGetUserInfo = true;
 
       }
     })
-    //获取经纬度
-    wx.getLocation({
-      success: function (res) {
-        console.log('getLocation is' + JSON.stringify(res));
-        app.position_data = res;
-        app.getCity_id_zhuhai();
-      },
-      fail: function (res) {
-      }
-    })
+
     var _timer = setInterval(function () {
       if (app.check_login.hasLogin && app.check_login.hasGetUserInfo) {
         clearInterval(_timer);
         console.log('进入initController条件成功');
         that.initController_zhuhai();
-
       }
     }, 10);
 
@@ -361,11 +370,12 @@ Page({
   //初始化页面_珠海
   initController_zhuhai: function () {
     console.log('有进入initController事件');
+ 
     var that = this;
     app.decryptedData_zhuhai(function () {
       console.log('进入decryptedData回调');
       app.initView_zhuhai(function (res) {
-        console.log('init初始化页面返回res='+JSON.stringify(res));
+        console.log('init初始化页面返回res=' + JSON.stringify(res));
         app.user_info_data.from_type = res.data.from_type;
         app.user_info_data._k = res.data._k;
         app.user_info_data.mobile = res.data.mobile;

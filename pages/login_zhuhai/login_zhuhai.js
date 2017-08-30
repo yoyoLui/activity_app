@@ -11,23 +11,36 @@ Page({
     button_down_text_add:'加油还可享4~6毛/L长期加油优惠',
     color: 'rgba(12, 17, 19, 0.72)!important'
   },
+  onReachBottom: function () {
 
+  },
   onShow: function () {
     wx.hideLoading();
     wx.hideNavigationBarLoading();
 
   },
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    //模拟加载
+    setTimeout(function () {
+      // complete
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+    }, 1500);
+    this.onLoad();
 
+  },
   //页面加载
   onLoad: function (option) {
+    console.log('进入login onload页面');
     wx.showNavigationBarLoading();
     var that = this;
-    //that.drawliner();
+   
     that.data.head_url = 'https://img.ejiayou.com/experience_app_img/experience_app_2/headImg_zhuhai.jpg';
     that.data.button_down_text = '分享到专快车群即可参与';
-    that.setData(that.data);
-
     that.data.mobile = app.user_info_data.mobile;
+    that.setData(that.data);
+    
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -36,6 +49,11 @@ Page({
     if (that.data.mobile != '') {
       isRightPhone = app.util.checkMobile(that.data.mobile);
     }
+    console.log("login page");
+    //获取分享标题
+    that.data.title = app.share_data.title;
+    console.log('标题' + that.data.title);
+    that.setData(that.data);
     if (!isRightPhone) {
       return;
     } else {//正确的手机号码
@@ -43,12 +61,6 @@ Page({
         button_disabled: ''
       })
     }
-
-    console.log("login page");
-    //获取分享标题
-    that.data.title = app.share_data.title;
-    console.log('标题' + that.data.title);
-    that.setData(that.data);
 
   },
   formSubmit: function (e) {//获取formId
@@ -79,9 +91,7 @@ Page({
         button_disabled: 'true'
       })
     }
-
   },
-
   onShareAppMessage: function (res) {//拉起分享页面
     var that = this;
     if (that.data.button_disabled == 'true') {//按钮没有激活，则返回
@@ -168,22 +178,7 @@ Page({
       url: "../received_zhuhai/received_zhuhai",
     })
   },
-  drawliner: function () {
-    const ctx = wx.createCanvasContext('myCanvas')
 
-    // Create linear gradient
-    const grd = ctx.createLinearGradient(0, 0, 0, 36)
-    grd.addColorStop(0, 'white')
-    grd.addColorStop(1, '#f4f4f4')
-
-    // Fill with gradient
-    ctx.setFillStyle(grd)
-    ctx.fillRect(0, 0, 600, 36)
-    ctx.draw()
-  },
-  onReachBottom: function () {
-
-  },
 })
 
 

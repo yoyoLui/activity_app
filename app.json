@@ -17,6 +17,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F4F4F4",
     "navigationBarTitleText": "易加油礼品卡",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
   }
 }

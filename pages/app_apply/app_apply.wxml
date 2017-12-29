@@ -46,7 +46,7 @@
           <view class="panel">
               <view class="panel-flex">
                 <text>短信验证码</text>
-                <input bindinput="bindCodeInput" name="smscode" type="number" maxlength="6" placeholder-style="color: rgba(12,17,19,0.22);"/>
+                <input bindinput="" name="smscode" type="number" maxlength="6" placeholder-style="color: rgba(12,17,19,0.22);"/>
                 <text bindtap="sendCode" class="code able">{{login_code}}</text>
               </view>
           </view>

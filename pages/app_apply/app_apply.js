@@ -40,7 +40,6 @@ Page({
       var timer = 0;
       var time = 30;
       if (that.data.codeflag == 1 && app.util.checkMobile(that.data.mobile)) {
-        
         that.data.codeflag = 0;
         app.getSmsCode(that.data.mobile , function(res){
 
@@ -165,34 +164,12 @@ Page({
       })
         return;
     }
-    if(!that.data.button_able){
-        wx.showModal({
-        title: '提示',
-        content: '验证码错误'
-      })
-        return;
-    }
-
-    var _data = {
-      union_id: app.app_data.union_id,
-      open_id: app.app_data.open_id,
-      name: e.detail.value.name.trim(),
-      pyname: e.detail.value.pyname.trim(),
-      number: e.detail.value.number.trim(),
-      numberarea: e.detail.value.numberarea.trim(),
-      mobile: e.detail.value.mobile.trim(),
-      smscode: e.detail.value.smscode.trim(),
-      email: e.detail.value.email.trim()
-    };
-
-    app.app_apply_data = _data;
-
-    console.log("提交资料参数");
-    console.log(_data);
-
-    wx.navigateTo({
-        url: "../upload/upload"
+ 
+    wx.redirectTo({
+      url: '/pages/success_applyed/success_applyed',
     })
+    return;
+
   }
   
 })

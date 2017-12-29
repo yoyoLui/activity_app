@@ -1,0 +1,19 @@
+  <view class="panel-mycard ">
+
+        <!-- <view class="nocard ">成功申请易加油专属油卡</view> -->
+
+        <view class="success " style="margin-bottom:60px;padding-bottom:60px;">
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170614222424.png" mode="widthFix" style="width:100%;display:block;"></image>
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_2.png" mode="widthFix" style="width:100%;display:block;"></image>
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_3.png" mode="widthFix" style="width:100%;display:block;"></image>
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_4.png" mode="widthFix" style="width:100%;display:block;"></image>
+        </view>
+
+        <view class="audting " style="margin-bottom:60px;padding-bottom:60px;">
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/new_1_checking_zkc@2x.png" mode="widthFix" style="width:100%;display:block;"></image>
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_2.png" mode="widthFix" style="width:100%;display:block;"></image>
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_3.png" mode="widthFix" style="width:100%;display:block;"></image>
+          <image src="https://img.ejiayou.com/experience_app_img/app_index/20170611_4.png" mode="widthFix" style="width:100%;display:block;"></image>
+        </view>
+
+    </view>

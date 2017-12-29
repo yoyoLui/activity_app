@@ -1,0 +1,40 @@
+<!--pages/collect_card/others/others.wxml-->
+
+<import src="../template/tmp.wxml"/>
+
+<view class="{{show_modal == null ? 'container' : 'container ban_move blur'}}">
+  <view class='section'>
+    <text class='head_text'>集齐卡片，瓜分十万加油金!</text>
+    <text class='head_subtext'>{{collect_info == null ? 0 : collect_info.num}}人集齐，每人可得{{collect_info == null ? 0 : collect_info.money}}元</text>
+  </view>
+  <view class='section'>
+    <view class='asker_info'>
+      <image class='asker_img' src="{{others_info && others_info.head_img == null ? images.default_head_img : others_info.head_img}}"></image>
+      <text class='asker_text'>{{others_info && (others_info.nickname == null || others_info.nickname =='') ? '易加油用户' : others_info.nickname}}邀请你帮他收集一张卡片</text>
+    </view>
+  </view>
+  <view class='section all_img'>
+    <image wx:for="{{all_img}}" bindtap="bingClickChangeImg" class='img img-{{index+1}}' data-index='{{index}}' src="{{item}}"></image>
+  </view>
+
+  <view class='section pt-20'>
+    <button bindtap='bindToIndexPage' class='btn btn-left'>{{is_attended == 0 ? '我也要参加' : '回到我的主页'}}</button>
+    <button wx:if="{{flag == 3}}" bindtap='bindHelp' class='btn btn-right'>帮他获得一张</button> 
+    <button wx:elif="{{flag == 2}}" bindtap='bindShowAuth' class='btn btn-right'>帮他获得一张</button> 
+    <button wx:elif="{{flag == 1}}" bindtap='bindShowLogin' class='btn btn-right'>帮他获得一张</button> 
+    <button wx:else open-type="getPhoneNumber" bindgetphonenumber="bindGetPhoneNumber" class='btn btn-right'>帮他获得一张</button> 
+  </view>
+
+  <view class='view_rule'>
+    <text bindtap='bindToRulePage' class='rule'>活动规则</text>
+  </view>
+
+  <view class='view_custom_service'>
+    <text bindtap='bindCallPhone' class='custom_service'>客服电话:400-8396-555</text>
+  </view>
+</view>
+
+<template wx:if="{{show_modal}}" is="alert_card" data="{{...show_modal,is_attended:is_attended,images:images}}"/> 
+<template wx:if="{{show_login}}" is="login" data="{{...form}}"/>
+<template wx:if="{{show_auth.show_auth}}" is="auth" data="{{...show_auth}}"/>
+<template wx:if="{{show_toast}}" is="toast" data="{{...show_toast}}"/>

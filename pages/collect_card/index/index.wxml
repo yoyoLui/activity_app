@@ -1,0 +1,80 @@
+<!--pages/collect_card/index/index.wxml-->
+<import src="../template/tmp.wxml"/>
+
+<view class="{{show_modal == null ? 'container' : 'container ban_move blur'}}">
+  <view class='main'>
+    <view class='main_inner view_head'>
+      <text class='head_text'>集齐卡片，瓜分十万加油金!</text>
+      <text class='head_subtext'>{{collect_info == null ? 0 : collect_info.num}}人集齐，每人可得{{collect_info == null ? 0 : collect_info.money}}元</text>
+    </view>
+    <view class='main_inner view-xl-img'>
+      <image class='xl-img' src='{{selected.card_img}}'></image>
+      <image bindtap='bingClickGetCard' wx:if="{{flag == 3 && selected.card_type == 5 && selected.card_num == 0}}" class='xl-img-inner' src="{{images.click_get_card}}"></image>
+    </view>
+    <view class='main_inner view_all_img'>
+      <view class='view_all_img'>
+
+        <block wx:for="{{card_info_list}}">
+            <image bindtap='bindShowImage'  data-card_type='{{item.card_type}}' data-card_num='{{item.card_num}}' class='sm-img' src='{{item.card_img}}'></image>
+            <text wx:if="{{item.card_num > 0}}" class='count'>{{item.card_num}}</text>
+        </block>
+
+      </view>
+      <view class='view_all_img_foot'>
+        <view class='view_img_foot'><view wx:if="{{selected.card_type == 1}}" class='sm-img-foot'></view></view>
+        <view class='view_img_foot'><view wx:if="{{selected.card_type == 2}}" class='sm-img-foot'></view></view>
+        <view class='view_img_foot'><view wx:if="{{selected.card_type == 3}}" class='sm-img-foot'></view></view>
+        <view class='view_img_foot'><view wx:if="{{selected.card_type == 4}}" class='sm-img-foot'></view></view>
+        <view class='view_img_foot'><view wx:if="{{selected.card_type == 5}}" class='sm-img-foot'></view></view>
+      </view>
+    </view>
+
+    <view class='main_inner view_button'>
+      <form bindsubmit="formSubmit" bindreset="formReset" report-submit="true">
+        <button open-type='share' data-req_type='2' class='btn btn-left' disabled="{{selected.card_num > 0 ? false : true}}">送给朋友</button>
+        <label bindtap='bindInviteClickCount'>
+          <button wx:if="{{flag == 3}}" formType="submit" open-type='share' class='btn btn-right'>邀请朋友帮忙</button>
+          <button wx:elif="{{flag == 2}}" bindtap='bindShowAuth' class='btn btn-right'>邀请朋友帮忙</button>
+          <button wx:elif="{{flag == 1}}" bindtap='bindShowLogin' class='btn btn-right'>邀请朋友帮忙</button>
+          <button wx:else open-type="getPhoneNumber" bindgetphonenumber="bindGetPhoneNumber" class='btn btn-right'>邀请朋友帮忙</button>
+        </label>
+      </form>
+    </view>
+
+    <view class='main_foot'>
+      <text class='main_foot_text'>每个朋友都可帮您获得一张随机卡片</text>
+    </view>
+
+    <view>
+      <image class='arrow' src='{{images.arrow}}'></image>
+    </view>
+  </view>
+  
+  <view wx:for="{{get_card_lists}}" class='helper_lists'>
+    <view class='helper_item'>
+      <view class='item_detail'><image class='helper_img' src="{{item.head_img == null || item.head_img =='' ? images.default_head_img : item.head_img}}"></image></view>
+      <view class='item_detail'>
+        <view class='item_text'>
+          <text>{{item.nickname == null || item.nickname =='' ? '易加油用户' : item.nickname}}</text>
+          <image class='text_img' src="{{images[text_category[item.card_type]]}}"></image>
+        </view>
+        <view class='item_subtext'>
+          <text>送了你一张</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='view_rule'>
+    <text bindtap='bindToRulePage' class='rule'>活动规则</text>
+  </view>
+
+  <view class='view_custom_service'>
+    <text bindtap='bindCallPhone' class='custom_service'>客服电话:400-8396-555</text>
+  </view>
+</view>
+
+<template wx:if="{{show_modal}}" is="alert_card" data="{{...show_modal,images:images}}"/>
+<template wx:if="{{show_login}}" is="login" data="{{...form}}"/>
+<template wx:if="{{show_auth.show_auth}}" is="auth" data="{{...show_auth}}"/>
+<template wx:if="{{show_toast}}" is="toast" data="{{...show_toast}}"/>

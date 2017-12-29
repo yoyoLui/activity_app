@@ -1,0 +1,205 @@
+@import "../../common/fontStyle.wxss";
+
+page {
+  font-family: 'PingFangSC-Regular';
+ overflow:hidden; 
+}
+
+.container {
+  padding: 0;
+  height: 100%;
+   overflow:hidden; 
+  font-family: 'PingFangSC-Regular';
+}
+
+view.bg_view {
+  height: auto;
+}
+
+.bg-view-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.title-word {
+  height: 78rpx;
+  width: 100%;
+  text-align: center;
+  margin: 56rpx auto;
+}
+
+.title-word .firstLine {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #725b2a;
+}
+
+.title-word .secondLine {
+  font-size: 28rpx;
+  color: #725b2a;
+  opacity: 0.64;
+  margin-top: 8rpx;
+}
+
+.inputPlateNum_view {
+  position: relative;
+  width: 654rpx;
+  height: 168rpx;
+  margin: 64rpx auto;
+  background-color: white;
+  text-align: center;
+}
+
+.inputPlateNum_view view {
+  position: absolute;
+  width: 616rpx;
+  height: 104rpx;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  margin-top: -52rpx;
+  margin-left: -313rpx;
+}
+
+input {
+  display: inline-block;
+  text-align: left;
+}
+
+.input_placeholder {
+  color: #ccc;
+  font-size: 64rpx;
+}
+
+view.plate {
+  position: absolute;
+  display: inline-block;
+  width: 88rpx;
+  height: 104rpx;
+  line-height: 104rpx;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 56rpx;
+  margin-left: 1rpx;
+  left: 150rpx;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.Light {
+  color: #000;
+}
+
+.Dark {
+  color: #ccc;
+}
+
+.plate image {
+  width: 88rpx;
+  height: 104rpx;
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.plate text {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  margin-left: -28rpx;
+}
+
+input.number {
+  position: absolute;
+  width: 324rpx;
+  height: 104rpx;
+  font-size: 64rpx;
+  left: 270rpx;
+   z-index: 2;
+}
+
+button.one_button {
+  width: 622rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background-color: #a4843c;
+  font-size: 18px;
+  color: #fde5ba;
+  border-radius: 44rpx;
+  border: 0px solid #a4843c;
+}
+
+button.light {
+  background-color: #d6a74b;
+  color: white;
+  border: 0px solid #d6a74b;
+}
+
+.button_view button.button-hover {
+  background: #8a6d2d;
+  
+}
+button::after{
+  border: 0px solid transparent;
+}
+.keyBoardBg {
+  position: absolute;
+  width: 100%;
+  bottom: -442rpx;
+  height: 442rpx;
+  background-color: #cfd4d7;
+}
+
+.keyBoard {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-around;
+  width: 656rpx;
+  height: auto;
+ 
+  margin: 0 auto;
+  padding: 12rpx 0;
+  box-sizing: border-box;
+}
+
+.keyBoardItem {
+  display: flex;
+  position: relative;
+  width: 64rpx;
+  height: 88rpx;
+  font-size: 36rpx;
+  color: #0c1113;
+  margin: 8rpx 8rpx;
+  text-align: center;
+  border: 0px solid transparent;
+}
+
+.keyBoardItem image {
+  position: absolute;
+  z-index: 0;
+  width: 64rpx;
+  height: 88rpx;
+  left: 0;
+}
+
+.keyBoardItem button {
+  position: absolute;
+  display: inline-block;
+  text-align: center;
+  z-index: 1;
+  width: 64rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 36rpx;
+  color: #0c1113;
+  left: 0;
+  padding: 0;
+}

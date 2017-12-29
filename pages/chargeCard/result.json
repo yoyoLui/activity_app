@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "礼品卡充值",
+  "navigationBarBackgroundColor": "#000",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "black",
+  "disableScroll": true,
+  "enablePullDownRefresh": false
+}

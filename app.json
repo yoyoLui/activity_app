@@ -1,17 +1,14 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/login/login",
-    "pages/new_active/new_active",
-    "pages/old_active_success/old_active_success",
-    "pages/change_phone/change_phone",
-    "pages/old_active/old_active",
-    "pages/upload/upload",
     "pages/app_apply/app_apply",
-    "pages/record/record",
-    "pages/login_zhuhai/login_zhuhai",
-    "pages/received_zhuhai/received_zhuhai",
-    "pages/change_phone_zhuhai/change_phone_zhuhai"
+    "pages/success_applyed/success_applyed",
+    "pages/chargeCard/inputPlateNum",
+    "pages/chargeCard/result",
+    "pages/collect_card/index/index",
+    "pages/collect_card/end/end",
+    "pages/collect_card/others/others",
+    "pages/collect_card/rule/rule"
   ],
   "window": {
     "backgroundTextStyle": "light",

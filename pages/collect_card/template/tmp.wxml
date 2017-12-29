@@ -1,0 +1,73 @@
+<!-- modal_type,1可100%获得此卡片,2您帮助了朋友获得了卡片或者是已帮过朋友,3恭喜您获得一张卡片 -->
+<template name="alert_card">
+  <view class='alert_card_blur'></view>  
+  <view class='alert_card_content'>
+    <view class="{{modal_type == 1 ? 'ac_text ac_text_sm' : 'ac_text'}}">
+      <text>{{text}}</text>
+    </view>
+    <view class="{{modal_type == 1 ? 'ac_card_name ac_card_name_sm' : 'ac_card_name'}}">
+      <text>{{card_name}}</text>
+    </view>
+    <view class='view_ac_card_img'>
+      <image class='ac_card_img' src='{{card_img}}'></image>
+    </view>
+
+    <block wx:if="{{modal_type == 1}}">
+      <label bindtap='bindInviteClickCount'>
+        <button open-type='share' class='ac_btn'>邀请好友帮忙</button>
+      </label>
+    </block>
+    <block wx:if="{{modal_type == 2}}">
+      <button bindtap='bindToIndexPage' class='ac_btn'>{{is_attended == 0 ? '我也要参加' : '回到我的主页'}}</button>
+    </block>
+    <image bindtap='bindHideModal' class='close_btn' src='{{images.close_btn}}'></image>
+  </view>
+</template>
+
+<template name="login">
+  <view bindtap='bindHideLogin' class='view_login_bk'></view>
+  <view class='view_login'>
+    <view class='login_head'>
+      <text class='login_text'>首次使用易加油</text>
+      <text class='login_subtext'>为保障您的账户安全和优惠权益，请填写手机号码</text>
+    </view>
+    <view class='view_form'>
+      <view class='view_input'>
+        <input bindinput='bindInputPhone' type='number' class='login_input' placeholder='请输入手机号码' placeholder-class="login_placeholder"></input>
+        <view class='view_code_btn'>
+          <button wx:if="{{send_success}}" class='get_code' disabled='true'>{{count_down}}S</button>
+          <button wx:else bindtap='bindGetCode' class='get_code'>获取验证码</button>
+        </view>
+      </view>
+      <view class='view_input'>
+        <input bindinput='bindInputCode' type='number' class='login_input' placeholder='请输入验证码' placeholder-class="login_placeholder"></input>
+      </view>
+    </view>
+    <view class='view_login_confirm'>
+      <button bindtap='bindConfirm' class='login_confirm' disabled='{{!can_confirm}}' loading="{{show_loading}}">确定</button>
+    </view>
+    <view class='view_login_logo'>
+      <image class='login_logo' src='{{images.pic_logo}}'></image>
+    </view>
+  </view>
+</template>
+
+<template name="auth">
+  <view class='view_auth_bk'>
+    <view class='view_auth'>
+      <text class='auth_text'>只有专快车/汽油货车可以参加活动哦</text>
+      <view class='view_auth_btn'>
+        <button bindtap='bindShowAuthWebView' data-car_type='1' class='auth_btn'>我是专快车</button>
+        <button bindtap='bindShowAuthWebView' data-car_type='2' class='auth_btn'>我是汽油货车</button>
+      </view>
+      <text bindtap='bindHideAuth' class='auth_subtext'>我不是</text>
+    </view>
+  </view>
+  <web-view wx:if="{{show_view}}" src="{{view_url}}"></web-view>
+</template>
+
+<template name="toast">
+  <view class='toast'>
+    {{title}}
+  </view>
+</template>

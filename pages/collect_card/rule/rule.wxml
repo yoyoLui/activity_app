@@ -1,0 +1,13 @@
+<!--pages/collect_card/rule/rule.wxml-->
+<view class='container'>
+  <view class='view_head'>
+    <text class='text'>活动时间:</text>
+    <text class='subtext'>{{time_str}}</text>
+  </view>
+  <view class='view_body'>
+    <view class='text'>参与方式:</view>
+      <view wx:for="{{rule_list}}" class='rule_lists subtext'>
+      <view class='item'>{{item}}</view> 
+    </view> 
+  </view>
+</view>

@@ -1,0 +1,24 @@
+<view class="container">
+  <view class="bg_view" style="width:100%;height:100%;">
+    <image src="https://img.ejiayou.com/experience_app_img/experience_app_2/chargeCard/background.png" class="bg-view-image"></image>
+  </view>
+  <view class="title-word">
+    <view class="firstLine">{{charge_title}}</view>
+    <view class="secondLine">{{charge_text}}</view>
+    <view wx:if="{{limitDate}}" class="secondLine" style="margin-top:0rpx;">{{limitDate}}</view>
+  </view>
+  <view wx:if="{{isLight}}">
+  
+    <image class="card_img" mode="widthFix" src="https://img.ejiayou.com/experience_app_img/experience_app_2/chargeCard/pic_card.png"></image>
+    <view wx:if="{{value}}" class="money"  >
+      <text>￥</text>{{value}}
+    </view>
+  </view>
+  <view wx:else>
+    <image class="card_img" mode="widthFix" src="https://img.ejiayou.com/experience_app_img/experience_app_2/chargeCard/pic_card_disabled.png"></image>
+    <view  wx:if="{{value}}" class="money" style="color:868686;opacity:0.5;">
+      <text>￥</text>{{value}}
+    </view>
+  </view>
+  <image class="QRcode_img" mode="widthFix" src="https://img.ejiayou.com/experience_app_img/experience_app_2/chargeCard/pic_footage.png"></image>
+</view>

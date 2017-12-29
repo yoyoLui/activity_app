@@ -1,0 +1,51 @@
+
+<view class="container">
+  <view class="bg_view" style="width:100%;height:100%;">
+    <image src="https://img.ejiayou.com/experience_app_img/experience_app_2/chargeCard/background.png" class="bg-view-image"></image>
+  </view>
+
+  <view class="title-word">
+    <view class="firstLine">请输入需要充值油费的车牌</view>
+    <view class="secondLine">充值后的油费将限定该车牌车辆加油使用</view>
+  </view>
+
+  <view class="inputPlateNum_view">
+    <view>
+
+      <view bindtouchstart="inputPlateFocusFun" class="{{plateTextfilled?'plate Light':'plate Dark'}}">
+
+        <image wx:if="{{!plateTextfilled}}" src="https://img.ejiayou.com/experience_app_img/experience_app_2/chargeCard/nofocus.png"></image>
+        <image wx:else src="https://img.ejiayou.com/experience_app_img/experience_app_2/chargeCard/focus.png"></image>
+        <text>{{plateText}}</text>
+      </view>
+
+      <input focus="{{autoFocus}}" bindinput="plateNumInput" bindtouchstart='plateNumFocus' class="number" type="text" placeholder='A88888' placeholder-class="input_placeholder" maxlength='6' value=""></input>
+    </view>
+  </view>
+  <view class="button_view" style="width:100%">
+    <form bindsubmit="buttonClick" report-submit='true'>
+      <button form-type="submit" class="{{plateTextfilled&&NumIsRight?'light':''}} one_button">确定充值</button>
+    </form>
+  </view>
+  <!--wxapp-toast start-->
+  <view class="wxapp-toast-content-box" wx:if="{{isShowToast}}" style="top:-10rpx;">
+    <view class="wxapp-toast-content">
+      <view class="wxapp-toast-content-text"> {{toastText}} </view>
+    </view>
+  </view>
+  <!--wxapp-toast end-->
+  <!--pullKeyBoard-->
+  <view wx:if="{{pullKeyBoard}}" animation="{{animationData}}" class="keyBoardBg" style="{{bottom}}">
+    <form bindsubmit="buttonClick2" report-submit='true'>
+      <view class="keyBoard">
+
+        <view wx:for="{{cityArr}}" wx:key="" id="{{item.id}}" bindtap='cityItemClick' class="keyBoardItem">
+          <button wx:if="{{item.id!=currentItemId}}" formType="submit" style="background-image:url('https://img.ejiayou.com/experience_app_img/experience_app_2/chargeCard/pic_keyboard.png');background-size:100% 100%;">{{item.city}}</button>
+           <button wx:else formType="submit" style="background-image:url('https://img.ejiayou.com/experience_app_img/experience_app_2/chargeCard/pic_keyboard_focused.png');background-size:100% 100%;">{{item.city}}</button>
+        </view>
+      </view>
+    </form>
+
+  </view>
+</view>
+<!-- </scroll-view> -->

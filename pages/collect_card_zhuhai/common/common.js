@@ -4,7 +4,7 @@ var img_url = 'https://img.ejiayou.com/imgs/activity/images/invite_card/'
 // var host = 'https://dev.ejiayou.com'
 var host = 'https://yifenshe.top'
 var pre_url = '/activity/invite_get_card'
-var invite_card_sub_id = 1
+var invite_card_sub_id = 2
 
 var server_url = {
   //活动内部链接--小程序集卡拉新活动

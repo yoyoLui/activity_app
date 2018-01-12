@@ -12,7 +12,6 @@ Page({
     share_user_info: null,
     show_modal: null,
     show_login: false,
-    show_auth: null,
     invite_card_sub_id: common.invite_card_sub_id,
     images: common.images,
     card_category: common.card_category,
@@ -39,7 +38,6 @@ Page({
       common.images.card_xl_colour_wl,
     ],
     
-    if_submit: 0,
   },
 
   /**
@@ -57,7 +55,7 @@ Page({
 
     if (others_user_id == undefined || others_user_id == 'undefined' || others_user_id == '') {
       wx.redirectTo({
-        url: '/pages/collect_card/index/index'
+        url: '/pages/collect_card_chengdu/index/index'
       })
       return;
     }
@@ -95,7 +93,7 @@ Page({
                 //活动结束
                 if (result.ret == 21 || result.ret == 22) {
                   wx.redirectTo({
-                    url: '/pages/collect_card/end/end',
+                    url: '/pages/collect_card_chengdu/end/end',
                   })
                   return;
                 }
@@ -118,14 +116,7 @@ Page({
                   })
 
                   if (result.flag == 2) {
-                    that.setData({
-                      show_auth: {
-                        show_auth: false,
-                        show_view: false,
-                        view_url_list: result.url,
-                      },
-                      if_submit: result.if_submit,
-                    })
+                    that.showCustomToast('抱歉，您不能参加该活动');
                   }
 
                   wx.hideLoading();
@@ -180,20 +171,8 @@ Page({
           } else if (result.flag == 2) {
             that.setData({
               flag: 2,
-              if_submit: result.if_submit,
-              ['user_info.user_id']: result.user_id,
-            })
-            if (result.if_submit == 1) {
-              that.showCustomToast('您已提交审核,请耐心等待');
-            } else {
-              that.setData({
-                show_auth: {
-                  show_auth: true,
-                  show_view: false,
-                  view_url_list: result.url,
-                },
-              })
-            }
+            });
+            that.showCustomToast('抱歉，您不能参加该活动');
           } else if (result.flag == 3) {
             that.setData({
               flag: 3,
@@ -287,7 +266,7 @@ Page({
     })
 
     wx.navigateTo({
-      url: '/pages/collect_card/rule/rule'
+      url: '/pages/collect_card_chengdu/rule/rule'
     })
   },
 
@@ -425,36 +404,17 @@ Page({
           //1去注册，2弹出认证框，3符合身份
           if (result.flag == 1) {
             that.setData({
-              flag: 2,
+              flag: 4,
               show_login: false,
               ['user_info.user_id']: result.user_id,
-              show_auth: {
-                show_auth: true,
-                show_view: false,
-                view_url_list: result.url
-              }
             })
+            that.showCustomToast('注册成功，请重新点击帮助好友获得卡片');
           } else if (result.flag == 2) {
             that.setData({
-              if_submit: result.if_submit,
               flag: 2,
               ['user_info.user_id']: result.user_id,
             })
-            if (result.if_submit == 1) {
-              that.showCustomToast('您已提交审核,请耐心等待');
-              that.setData({
-                show_login: false
-              })
-            } else {
-              that.setData({
-                show_login: false,
-                show_auth: {
-                  show_auth: true,
-                  show_view: false,
-                  view_url_list: result.url
-                }
-              })
-            }
+            that.showCustomToast('抱歉，您不能参加该活动');
           } else if (result.flag == 3) {
             that.setData({
               show_login: false,
@@ -483,28 +443,11 @@ Page({
     })
   },
 
-  /**
-   * 显示身份认证框
-   */
-  bindShowAuth: function () {
-    var that = this
-    if (that.data.if_submit == 1) {
-      that.showCustomToast('您已提交审核,请耐心等待');
-      return
-    }
-    this.setData({
-      ['show_auth.show_auth']: true
-    })
-  },
-
-  /**
-   * 显示提交审核web-view页面，外部页面
-   */
-  bindShowAuthWebView: function (event) {
-    var that = this
-
-    wx.showNavigationBarLoading()
-
+/**
+ * 新用户帮忙
+ */
+  bindNewHelp: function() {
+    var that = this;
     wx.request({
       url: common.server_url.save_register_log,
       data: {
@@ -513,34 +456,18 @@ Page({
         invite_card_sub_id: common.invite_card_sub_id
       },
       method: 'POST',
-      success: function(res) {}
+      success: function (res) { }
     })
 
-    var car_type = event.currentTarget.dataset.car_type;
-    if (car_type == 1) {
-      that.setData({
-        ['show_auth.show_view']: true,
-        ['show_auth.view_url']: that.data.show_auth.view_url_list[0]
-      })
-    } else {
-      that.setData({
-        ['show_auth.show_view']: true,
-        ['show_auth.view_url']: that.data.show_auth.view_url_list[1]
-      })
-    }
-    
-    setTimeout(function () {
-      wx.hideNavigationBarLoading()
-    }, 2000)
+    that.showCustomToast('帮助成功！您在易加油油站支付完后，该好友会自动获得“五菱”卡片');
   },
 
   /**
-   * 隐藏身份认证框
+   * 身份不符合
    */
-  bindHideAuth: function () {
-    this.setData({
-      ['show_auth.show_auth']: false
-    })
+  bindNotAuth: function () {
+    var that = this
+    that.showCustomToast('抱歉，您不能参加该活动');
   },
 
   /**
@@ -572,7 +499,7 @@ Page({
     })
 
     wx.redirectTo({
-      url: '/pages/collect_card/index/index'
+      url: '/pages/collect_card_chengdu/index/index'
     })
   },
 

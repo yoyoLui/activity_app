@@ -1,0 +1,37 @@
+/* pages/collect_card/rule/rule.wxss */
+page {
+  height: 100%;
+  margin: 0 auto;
+}
+.container {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+}
+.view_head {
+  margin-top: 10rpx;
+  padding: 20rpx 0;
+  border-bottom: 1px solid #DCDCDC;
+}
+.text {
+  display: block;
+  font-size: 45rpx;
+  color: #323232;
+}
+.subtext {
+  display: block;
+  font-size: 35rpx;
+  color: #646464;
+  letter-spacing: 0;
+  margin-top: 20rpx;
+}
+
+.view_body {
+  margin-top: 30rpx;
+}
+.item {
+  margin: 30rpx auto;
+}
+/* .rule_lists {
+  padding: 50rpx 0;
+} */

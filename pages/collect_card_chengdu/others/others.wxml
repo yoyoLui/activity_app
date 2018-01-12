@@ -19,8 +19,9 @@
 
   <view class='section pt-20'>
     <button bindtap='bindToIndexPage' class='btn btn-left'>{{is_attended == 0 ? '我也要参加' : '回到我的主页'}}</button>
-    <button wx:if="{{flag == 3}}" bindtap='bindHelp' class='btn btn-right'>帮他获得一张</button> 
-    <button wx:elif="{{flag == 2}}" bindtap='bindShowAuth' class='btn btn-right'>帮他获得一张</button> 
+    <button wx:if="{{flag == 4}}" bindtap='bindNewHelp' class='btn btn-right'>帮他获得一张</button>
+    <button wx:elif="{{flag == 3}}" bindtap='bindHelp' class='btn btn-right'>帮他获得一张</button> 
+    <button wx:elif="{{flag == 2}}" bindtap='bindNotAuth' class='btn btn-right'>帮他获得一张</button> 
     <button wx:elif="{{flag == 1}}" bindtap='bindShowLogin' class='btn btn-right'>帮他获得一张</button> 
     <button wx:else open-type="getPhoneNumber" bindgetphonenumber="bindGetPhoneNumber" class='btn btn-right'>帮他获得一张</button> 
   </view>
@@ -36,5 +37,4 @@
 
 <template wx:if="{{show_modal}}" is="alert_card" data="{{...show_modal,is_attended:is_attended,images:images}}"/> 
 <template wx:if="{{show_login}}" is="login" data="{{...form,images:images}}"/>
-<template wx:if="{{show_auth.show_auth}}" is="auth" data="{{...show_auth}}"/>
 <template wx:if="{{show_toast}}" is="toast" data="{{...show_toast}}"/>

@@ -16,7 +16,6 @@ Page({
     get_card_lists: null,
     show_modal: null,
     show_login: false,
-    show_auth: null,
     complete: false,
     images: common.images,
     card_category: common.card_category,
@@ -37,7 +36,6 @@ Page({
 
     collect_info: null,
 
-    if_submit: 1,
   },
 
   /**
@@ -54,7 +52,7 @@ Page({
   onLoad: function (options) {
     wx.setStorage({
       key: 'collectCard',
-      data: '/pages/collect_card/index/index',
+      data: '/pages/collect_card_chengdu/index/index',
     })
     var that = this
 
@@ -121,7 +119,7 @@ Page({
                 //活动结束
                 if (result.ret == 21 || result.ret == 22) {
                   wx.redirectTo({
-                    url: '/pages/collect_card/end/end',
+                    url: '/pages/collect_card_chengdu/end/end',
                   })
                   return;
                 }
@@ -142,14 +140,7 @@ Page({
                   })
 
                   if (result.flag == 2) {
-                    that.setData({
-                      show_auth: {
-                        show_auth: false,
-                        show_view: false,
-                        view_url_list: result.url,
-                      },
-                      if_submit: result.if_submit,
-                    })
+                    that.showCustomToast('抱歉，您不能参加该活动');
                   }
 
                   //成功数据
@@ -239,7 +230,7 @@ Page({
     var that = this
 
     if (res.from === 'button') {
-      var path = '/pages/collect_card/others/others?user_id=' + that.data.user_info.user_id;
+      var path = '/pages/collect_card_chengdu/others/others?user_id=' + that.data.user_info.user_id;
       var title = that.data.user_info.nickname + '邀请你帮他收集加油卡片~'
       var req_type = res.target.dataset.req_type
       //1邀请朋友帮忙，2赠送
@@ -249,7 +240,7 @@ Page({
         if (that.data.card_info_list[that.data.selected.card_type - 1].list.length > 0) {
           card_id = that.data.card_info_list[that.data.selected.card_type - 1].list[0].id;
         }
-        path = '/pages/collect_card/index/index?card_id=' + card_id;
+        path = '/pages/collect_card_chengdu/index/index?card_id=' + card_id;
         title = that.data.user_info.nickname + '赠送了你一张加油卡片~';
       }
 
@@ -303,7 +294,7 @@ Page({
 
     return {
       title: '集齐卡片，瓜分十万加油金',
-      path: '/pages/collect_card/index/index',
+      path: '/pages/collect_card_chengdu/index/index',
       imageUrl: common.images.app_cover,
       success: function (res) {
         // 转发成功
@@ -357,20 +348,9 @@ Page({
           } else if (result.flag == 2) {
             that.setData({
               flag: 2,
-              if_submit: result.if_submit,
-              ['user_info.user_id']: result.user_id,
-            })
-            if (result.if_submit == 1) {
-              that.showCustomToast('您已提交审核,请耐心等待');
-            } else {
-              that.setData({
-                show_auth: {
-                  show_auth: true,
-                  show_view: false,
-                  view_url_list: result.url,
-                },
-              })
-            }
+              ['user_info.user_id']: result.user_id
+            });
+            that.showCustomToast('抱歉，您不能参加该活动');
           } else if (result.flag == 3) {
             that.setData({
               flag: 3,
@@ -491,7 +471,7 @@ Page({
     })
 
     wx.navigateTo({
-      url: '/pages/collect_card/rule/rule'
+      url: '/pages/collect_card_chengdu/rule/rule'
     })
   },
 
@@ -629,35 +609,16 @@ Page({
           //1去注册，2弹出认证框，3符合身份
           if (result.flag == 1) {
             that.setData({
-              flag: 2,
+              flag: 3,
               show_login: false,
               ['user_info.user_id']: result.user_id,
-              show_auth: {
-                show_auth: true,
-                show_view: false,
-                view_url_list: result.url
-              }
             })
+            that.showCustomToast('注册成功')
           } else if (result.flag == 2) {
             that.setData({
-              if_submit: result.if_submit,
               flag: 2,
             })
-            if (result.if_submit == 1) {
-              that.showCustomToast('您已提交审核,请耐心等待');
-              that.setData({
-                show_login: false
-              })
-            } else {
-              that.setData({
-                show_login: false,
-                show_auth: {
-                  show_auth: true,
-                  show_view: false,
-                  view_url_list: result.url
-                }
-              })
-            }
+            that.showCustomToast('抱歉，您不能参加该活动');
           } else if (result.flag == 3) {
             that.setData({
               show_login: false,
@@ -687,48 +648,11 @@ Page({
   },
 
   /**
-   * 显示身份认证框
+   * 身份认不符合提示
    */
-  bindShowAuth: function () {
+  bindNotAuth: function () {
     var that = this
-    if (that.data.if_submit == 1) {
-      that.showCustomToast('您已提交审核,请耐心等待');
-      return
-    }
-    that.setData({
-      ['show_auth.show_auth']: true
-    })
-  },
-
-  /**
-   * 显示提交审核web-view页面，外部页面
-   */
-  bindShowAuthWebView: function (event) {
-    wx.showNavigationBarLoading()
-    var car_type = event.currentTarget.dataset.car_type;
-    if (car_type == 1) {
-      this.setData({
-        ['show_auth.show_view']: true,
-        ['show_auth.view_url']: this.data.show_auth.view_url_list[0]
-      })
-    } else {
-      this.setData({
-        ['show_auth.show_view']: true,
-        ['show_auth.view_url']: this.data.show_auth.view_url_list[1]
-      })
-    }
-    setTimeout(function () {
-      wx.hideNavigationBarLoading()
-    }, 2000)
-  },
-
-  /**
-   * 隐藏身份认证框
-   */
-  bindHideAuth: function () {
-    this.setData({
-      ['show_auth.show_auth']: false
-    })
+    that.showCustomToast('抱歉，您不能参加该活动');
   },
 
   /**
@@ -747,7 +671,7 @@ Page({
    */
   bindToIndexPage: function () {
     wx.redirectTo({
-      url: '/pages/collect_card/index/index'
+      url: '/pages/collect_card_chengdu/index/index'
     })
   },
 

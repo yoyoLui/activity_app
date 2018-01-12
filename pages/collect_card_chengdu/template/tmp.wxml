@@ -55,12 +55,10 @@
 <template name="auth">
   <view class='view_auth_bk'>
     <view class='view_auth'>
-      <text class='auth_text'>只有专快车/汽油货车可以参加活动哦</text>
+      <text class='auth_text'>只有注册之后才可以参与活动</text>
       <view class='view_auth_btn'>
-        <button bindtap='bindShowAuthWebView' data-car_type='1' class='auth_btn'>我是专快车</button>
-        <button bindtap='bindShowAuthWebView' data-car_type='2' class='auth_btn'>我是汽油货车</button>
+        <button bindtap='bindShowAuthWebView' class='auth_btn'>确定</button>
       </view>
-      <text bindtap='bindHideAuth' class='auth_subtext'>我不是</text>
     </view>
   </view>
   <web-view wx:if="{{show_view}}" src="{{view_url}}"></web-view>

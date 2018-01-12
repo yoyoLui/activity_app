@@ -8,7 +8,15 @@
     "pages/collect_card/index/index",
     "pages/collect_card/end/end",
     "pages/collect_card/others/others",
-    "pages/collect_card/rule/rule"
+    "pages/collect_card/rule/rule",
+    "pages/collect_card_zhuhai/index/index",
+    "pages/collect_card_zhuhai/end/end",
+    "pages/collect_card_zhuhai/others/others",
+    "pages/collect_card_zhuhai/rule/rule",
+    "pages/collect_card_chengdu/index/index",
+    "pages/collect_card_chengdu/end/end",
+    "pages/collect_card_chengdu/others/others",
+    "pages/collect_card_chengdu/rule/rule"
   ],
   "window": {
     "backgroundTextStyle": "light",

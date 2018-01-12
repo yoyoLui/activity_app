@@ -108,7 +108,7 @@ Page({
     })
 
     wx.navigateTo({
-      url: '/pages/collect_card/rule/rule'
+      url: '/pages/collect_card_chengdu/rule/rule'
     })
   },
 

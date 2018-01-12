@@ -57,7 +57,7 @@ Page({
 
     if (others_user_id == undefined || others_user_id == 'undefined' || others_user_id == '') {
       wx.redirectTo({
-        url: '/pages/collect_card/index/index'
+        url: '/pages/collect_card_zhuhai/index/index'
       })
       return;
     }
@@ -95,7 +95,7 @@ Page({
                 //活动结束
                 if (result.ret == 21 || result.ret == 22) {
                   wx.redirectTo({
-                    url: '/pages/collect_card/end/end',
+                    url: '/pages/collect_card_zhuhai/end/end',
                   })
                   return;
                 }
@@ -287,7 +287,7 @@ Page({
     })
 
     wx.navigateTo({
-      url: '/pages/collect_card/rule/rule'
+      url: '/pages/collect_card_zhuhai/rule/rule'
     })
   },
 
@@ -572,7 +572,7 @@ Page({
     })
 
     wx.redirectTo({
-      url: '/pages/collect_card/index/index'
+      url: '/pages/collect_card_zhuhai/index/index'
     })
   },
 

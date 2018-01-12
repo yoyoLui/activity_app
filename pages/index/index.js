@@ -19,18 +19,16 @@ Page({
    
     //如果曾经打开过集卡页面，则跳转集卡页面
     try {
-      var value = wx.getStorageSync('collectCard')
-      if (value) {
-        console.log(JSON.stringify(value));
-        if (value) {
-          wx.redirectTo({
-            url: '../collect_card/index/index?channel=1',
-          })
-        }
+      var value = wx.getStorageSync('collectCard');
+      console.log(value);
+      if (value != "") {
+        wx.redirectTo({
+          url: value,
+        })
+        return;
       }
     } catch (e) {
       console.log('no storage');
-      
     }
    
 

@@ -1,0 +1,25 @@
+<!--pages/collect_card/end/end.wxml-->
+
+<view class='container'>
+  <view class='section'>
+    <text class='head_text'>集齐卡片，瓜分十万加油金!</text>
+    <text class='head_subtext'>{{collect_info == null ? 0 : collect_info.num}}人集齐，每人可得{{collect_info == null ? 0 : collect_info.money}}元</text>
+  </view>
+  <view class='section'>
+    <view wx:if="{{success}}" class='congratulate'>恭喜您已集齐，获得30元加油金！</view>
+    <view wx:else class='congratulate'>活动已结束，很遗憾您没集齐！</view>
+  </view>
+  <view class='section all_img'>
+    <image wx:for="{{all_img}}" bindtap="bingClickChangeImg" class='img img-{{index+1}}' data-index='{{index}}' src="{{item}}"></image>
+  </view>
+  <view class='section'>
+    <button bindtap='bindShowWebView' wx:if="{{success}}" class='show_coupon'>查看加油金</button>
+  </view>
+  <view class='section'>
+    <text bindtap='bindToRulePage' class='rule'>活动规则</text>
+  </view>
+  <view class='view_custom_service'>
+    <text bindtap='bindCallPhone' class='custom_service'>客服电话:400-8396-555</text>
+  </view>
+</view>
+<web-view wx:if="{{web_view.show_view}}" src="{{web_view.view_url}}"></web-view>

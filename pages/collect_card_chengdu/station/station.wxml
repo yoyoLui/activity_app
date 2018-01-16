@@ -1,0 +1,36 @@
+<!--pages/collect_card_chengdu/station/station.wxml-->
+
+<view class="container">
+  <view class='view_foot'>
+    成都合作油站
+  </view>
+  <view class='station_lists'>
+    <view class="station_item" wx:for="{{station_lists}}">
+      <view class='station_info'>
+        <view class='view_station_img'>
+          <image class='station_img' src="{{item.pic_url}}"></image>
+        </view>
+        <view class='station_main'>
+          <view class='station_name'>
+            <text>{{item.filling_station_name}}</text>
+            <text class='right_text point'>{{item.station_star}}分</text>
+          </view>
+          <view class='station_location'>
+            <text>{{item.filling_station_address}}</text>
+            <text class='right_text'>{{item.distance}}km</text>
+          </view>
+          <view class='station_discount'>
+            {{item.reduce_msg}}
+            <text style='font-size:17.5px;'>{{item.reduce_price}}</text>
+            元 <text style='font-size:8.5px;'>▶</text>
+          </view>
+        </view>
+      </view>
+      <view class='station_oil_price'>
+        <text wx:for="{{item.oils}}" space='nbsp'>{{item.oil_code}} {{item.price}}元/L    </text>
+      </view>
+    </view>
+  </view>
+
+</view>
+

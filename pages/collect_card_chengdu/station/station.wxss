@@ -1,0 +1,117 @@
+/* pages/collect_card_chengdu/station/station.wxss */
+
+.view_head {
+   width: 100%;
+   height: 60%;
+   margin: 0 auto;
+}
+
+.background_img {
+  width: 100%;
+  height: 100%;
+}
+
+.view_main {
+  height: 50%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.item {
+  width: 80%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  margin: 20px auto;
+  border-radius: 51px;
+}
+
+.subtext {
+  height: 32rpx;
+  line-height: 32rpx; 
+  font-size: 30rpx;
+  color: #0C1113;
+}
+.text{
+  color: #FFFFFF;
+  font-size: 35rpx;
+}
+.btn {
+  background: #FB7511;
+}
+
+.view_foot {
+  text-align: center;
+  padding: 30rpx;
+}
+
+.station_lists {
+  width: 100%;
+}
+.station_item {
+  width: 100%;
+  height: 123px;
+  /* background-color: #F4F4F4; */
+  /* margin: 5px; */
+  border-bottom: solid 0.5px #F0F0F2;
+}
+
+.station_info {
+  height: 72px;
+  /* margin-top: 15px; */
+  padding-top: 15px;
+}
+
+.view_station_img {
+  height: 72px;
+  width: 27%;
+  text-align: center;
+  float: left;
+}
+.station_img {
+  height: 72px;
+  width: 80px;
+}
+
+.station_main {
+  height: 72px;
+  /* width: 210px; */
+  width: 69%;
+  float: left;
+  position: relative;
+}
+.station_name {
+  font-size: 17.5px;
+  color: #323232;
+  /* margin-top: -4px;  */
+  height: 20px;
+  line-height: 20px;
+}
+.station_location {
+  font-size: 12.5px;
+  color: #969696;
+  margin-top: 6px;
+}
+.station_discount {
+  font-size: 12.5px;
+  color: #FFA032;
+  position: absolute;
+  bottom: 0px;
+  height: 18px;
+  line-height: 20px
+}
+.right_text {
+  float: right;
+  font-size: 12.5px;
+}
+.point {
+  color: #EFC241;
+  /* margin-top: 4px; */
+}
+
+.station_oil_price {
+  padding-left: 27%;
+  font-size: 12.5px;
+  color: #969696;
+  margin-top: 5px;
+}

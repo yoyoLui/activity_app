@@ -1,0 +1,5 @@
+<form bindsubmit="buttonClick" report-submit='true'>
+
+<button form-type="submit" bind:touchstart="jump">输入手枪</button>
+</form>
+

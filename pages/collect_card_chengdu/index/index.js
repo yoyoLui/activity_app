@@ -426,7 +426,7 @@ Page({
     that.setData({
       show_modal: {
         modal_type: 1,
-        text: '请没有注册易加油专快车/汽油小货车的朋友帮忙收集',
+        text: '请没有注册过易加油的车主朋友注册并支付一次',
         card_name: '可100%获得此卡片',
         card_img: common.getCardImg('xl', 5, 1)
       }

@@ -19,7 +19,7 @@
 
   <view class='section pt-20'>
     <button bindtap='bindToIndexPage' class='btn btn-left'>{{is_attended == 0 ? '我也要参加' : '回到我的主页'}}</button>
-    <button wx:if="{{flag == 4}}" bindtap='bindNewHelp' class='btn btn-right'>帮他获得一张</button>
+    <button wx:if="{{flag == 4}}" bindtap='bindPayHint' class='btn btn-right'>帮他获得一张</button>
     <button wx:elif="{{flag == 3}}" bindtap='bindHelp' class='btn btn-right'>帮他获得一张</button> 
     <button wx:elif="{{flag == 2}}" bindtap='bindNotAuth' class='btn btn-right'>帮他获得一张</button> 
     <button wx:elif="{{flag == 1}}" bindtap='bindShowLogin' class='btn btn-right'>帮他获得一张</button> 

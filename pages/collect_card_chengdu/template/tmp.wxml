@@ -2,24 +2,52 @@
 <template name="alert_card">
   <view class='alert_card_blur'></view>  
   <view class='alert_card_content'>
-    <view class="{{modal_type == 1 ? 'ac_text ac_text_sm' : 'ac_text'}}">
+  <block wx:if="{{modal_type == 1}}">
+    <view class="ac_text ac_text_sm">
       <text>{{text}}</text>
     </view>
-    <view class="{{modal_type == 1 ? 'ac_card_name ac_card_name_sm' : 'ac_card_name'}}">
+    <view class="ac_card_name ac_card_name_sm">
       <text>{{card_name}}</text>
     </view>
     <view class='view_ac_card_img'>
       <image class='ac_card_img' src='{{card_img}}'></image>
     </view>
+    <label bindtap='bindInviteClickCount'>
+      <button open-type='share' class='ac_btn'>邀请好友帮忙</button>
+    </label>
+  </block>
 
-    <block wx:if="{{modal_type == 1}}">
-      <label bindtap='bindInviteClickCount'>
-        <button open-type='share' class='ac_btn'>邀请好友帮忙</button>
-      </label>
-    </block>
-    <block wx:if="{{modal_type == 2}}">
+  <block wx:elif="{{modal_type == 2 || modal_type == 3}}">
+    <view class="ac_text">
+      <text>{{text}}</text>
+    </view>
+    <view class="ac_card_name">
+      <text>{{card_name}}</text>
+    </view>
+    <view class='view_ac_card_img'>
+      <image class='ac_card_img' src='{{card_img}}'></image>
+    </view>
+    <label bindtap='bindInviteClickCount'>
       <button bindtap='bindToIndexPage' class='ac_btn'>{{is_attended == 0 ? '我也要参加' : '回到我的主页'}}</button>
-    </block>
+    </label>
+  </block>
+
+  <block wx:elif="{{modal_type == 4}}">
+    <view class="ac_text ac_text_sm">
+      <text>{{text}}\n</text>
+      <text>{{subtext}}</text>
+    </view>
+    <view class="ac_card_name ac_card_name_sm">
+      <text>{{card_name}}</text>
+    </view>
+    <view class='view_ac_card_img'>
+      <image class='ac_card_img' src='{{card_img}}'></image>
+    </view>
+    <label bindtap='bindInviteClickCount'>
+      <button bindtap='bindGoFilling' class='ac_btn'>去加油</button>
+    </label>
+  </block>
+    
     <image bindtap='bindHideModal' class='close_btn' src='{{images.close_btn}}'></image>
   </view>
 </template>

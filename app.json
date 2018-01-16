@@ -16,7 +16,10 @@
     "pages/collect_card_chengdu/index/index",
     "pages/collect_card_chengdu/end/end",
     "pages/collect_card_chengdu/others/others",
-    "pages/collect_card_chengdu/rule/rule"
+    "pages/collect_card_chengdu/rule/rule",
+"pages/collect_card_chengdu/station/station",
+    "pages/inputgun_webview/inputgun",
+    "pages/inputgun_webview/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

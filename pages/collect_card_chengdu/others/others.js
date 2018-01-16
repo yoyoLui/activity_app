@@ -37,7 +37,7 @@ Page({
       common.images.card_xl_colour_bc,
       common.images.card_xl_colour_wl,
     ],
-    
+
   },
 
   /**
@@ -231,6 +231,16 @@ Page({
               card_img: common.getCardImg('xl', result.card_type, 1)
             }
           })
+        } else if (result.ret == 12) {
+          that.setData({
+            show_modal: {
+              modal_type: 4,
+              text: '您只需使用易加油完成一次任意金额的加油',
+              subtext: '您的好友即可自动获得如下卡片',
+              card_name: '“五菱”',
+              card_img: common.getCardImg('xl', 5, 0)
+            }
+          })
         } else {
           that.showCustomToast(result.msg);
         }
@@ -408,7 +418,26 @@ Page({
               show_login: false,
               ['user_info.user_id']: result.user_id,
             })
-            that.showCustomToast('注册成功，请重新点击帮助好友获得卡片');
+            wx.request({
+              url: common.server_url.save_register_log,
+              data: {
+                user_info: that.data.user_info,
+                user_id: that.data.others_info.user_id,
+                invite_card_sub_id: common.invite_card_sub_id
+              },
+              method: 'POST',
+              success: function (res) {}
+            })
+            that.setData({
+              show_modal: {
+                modal_type: 4,
+                text: '您只需使用易加油完成一次任意金额的加油',
+                subtext: '您的好友即可自动获得如下卡片',
+                card_name: '“五菱”',
+                card_img: common.getCardImg('xl', 5, 0)
+              }
+            })
+            
           } else if (result.flag == 2) {
             that.setData({
               flag: 2,
@@ -446,20 +475,19 @@ Page({
 /**
  * 新用户帮忙
  */
-  bindNewHelp: function() {
+  bindPayHint: function() {
     var that = this;
-    wx.request({
-      url: common.server_url.save_register_log,
-      data: {
-        user_info: that.data.user_info,
-        user_id: that.data.others_info.user_id,
-        invite_card_sub_id: common.invite_card_sub_id
-      },
-      method: 'POST',
-      success: function (res) { }
+
+    that.setData({
+      show_modal: {
+        modal_type: 4,
+        text: '您只需使用易加油完成一次任意金额的加油',
+        subtext: '您的好友即可自动获得如下卡片',
+        card_name: '“五菱”',
+        card_img: common.getCardImg('xl', 5, 0)
+      }
     })
 
-    that.showCustomToast('帮助成功！您在易加油油站支付完后，该好友会自动获得“五菱”卡片');
   },
 
   /**
@@ -538,6 +566,15 @@ Page({
   bindCallPhone: function () {
     wx.makePhoneCall({
       phoneNumber: '400-8396-555'
+    })
+  },
+
+/**
+ * 去加油
+ */
+  bindGoFilling: function() {
+    wx.navigateTo({
+      url: '/pages/collect_card_chengdu/station/station',
     })
   }
 })
